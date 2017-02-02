@@ -8,7 +8,10 @@ if(TARGET === 'build') {
   module.exports = {
     devtool: 'inline-source-map',
     entry: {
-      index: './src/',
+      index: [
+        './src/components',
+        //'./src/containers',
+      ],
       utils: './src/utils',
       styles: './src/styles',
     },
@@ -23,6 +26,7 @@ if(TARGET === 'build') {
           include: [
             path.resolve(__dirname, 'src'),
             path.resolve(__dirname, 'src/components'),
+            //path.resolve(__dirname, 'src/containers'),
             path.resolve(__dirname, 'src/styles'),
             path.resolve(__dirname, 'src/utils'),
           ],
