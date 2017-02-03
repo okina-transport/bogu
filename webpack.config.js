@@ -52,3 +52,45 @@ if(TARGET === 'build') {
   };
 }
 
+if(TARGET === 'dev') {
+  const hostname = process.env.HOST || '127.0.0.1';
+  const port = process.env.PORT || 9000;
+
+  module.exports = {
+    devtool: 'inline-source-map',
+    entry: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://' + hostname + ':' + port,
+      'webpack/hot/only-dev-server',
+      './app/index.js',
+    ],
+    output: {
+      path: path.resolve(__dirname, '/public/'),
+      filename: 'bundle.js',
+      publicPath: '/'
+    },
+    context: path.resolve(__dirname, '.'),
+    resolve: {
+      extensions: ['.js', '.jsx']
+    },
+    module: {
+      loaders: [
+        {
+          test: /\.js?$/,
+          exclude: /node_modules/,
+          include: __dirname,
+          loader: ['babel-loader']
+        }
+      ]
+    },
+    devServer: {
+      contentBase: path.resolve(__dirname, 'public'),
+      hot: true,
+      host: hostname,
+      port: port
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin()
+    ]
+  };
+}
