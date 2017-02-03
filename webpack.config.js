@@ -6,7 +6,7 @@ process.env.BABEL_ENV = TARGET;
 
 if(TARGET === 'build') {
   module.exports = {
-    devtool: 'inline-source-map',
+    devtool: 'eval-source-map',
     entry: {
       index: [
         './src/components',
@@ -24,17 +24,12 @@ if(TARGET === 'build') {
           test: /\.js?$/,
           exclude: /node_modules/,
           include: [
-            path.resolve(__dirname, 'src'),
             path.resolve(__dirname, 'src/components'),
             //path.resolve(__dirname, 'src/containers'),
             path.resolve(__dirname, 'src/styles'),
             path.resolve(__dirname, 'src/utils'),
           ],
-          loader: 'babel-loader',
-          query: {
-            presets: ['es2015', 'react', 'stage-0'],
-            plugins: ['transform-runtime'],
-          }
+          loader: 'babel-loader'
         }
       ]
     },
