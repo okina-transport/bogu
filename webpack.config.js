@@ -6,7 +6,7 @@ process.env.BABEL_ENV = TARGET;
 
 if(TARGET === 'build') {
   module.exports = {
-    devtool: 'eval-source-map',
+    devtool: 'inline-source-map',
     entry: {
       index: [
         './src/components',
