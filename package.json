@@ -1,18 +1,15 @@
 {
   "name": "bogu",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Conjuntion of code in bel and ninkasi",
   "main": "index.js",
   "keywords": [
     "bel",
     "ninkasi"
   ],
-  "bin": {
-    "mocha": "./node_modules/mocha/bin/mocha"
-  },
   "scripts": {
     "build": "webpack --progress --colors --display-error-details",
-    "test": "mocha -r jsdom-global/register --compilers js:babel-core/register ./tests/calculations.spec.js"
+    "test": "./node_modules/mocha/bin/mocha -r jsdom-global/register --compilers js:babel-core/register ./tests/calculations.spec.js"
   },
   "author": "Morten Friesgaard",
   "license": "MIT",
