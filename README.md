@@ -15,6 +15,17 @@ When building the library it ends up in three bundles: 'bogu', 'bogu/utils' and 
 or
 * `import { color } from 'bogu/styles'`
 
+# Release
+Remember to build before releases. 
+
+Checklist includes:
+* `npm run build`
+* `npm run test`
+* `git commit ...`
+* `git tag <version>`
+* `git push && git push --tags`
+
+`<version>` number is used with npm.
 
 # NPM install
 Bogu is installed with npm from github using the following command: 
