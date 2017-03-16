@@ -102,8 +102,6 @@ const sortValidity = validity => validity.sort( (a, b) => a['numDaysAtLeastValid
 
 export const formatLineStats = lineStats => {
 
-  console.log("running formatLineStats")
-
   try {
 
     const defaultObject = { lineNumbers: [] }
