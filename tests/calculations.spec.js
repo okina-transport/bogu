@@ -119,7 +119,7 @@ describe('Days valid calculation', () => {
     let list = { ... lineStatsNorland }
     let formattedLines = formatLineStats(list)
 
-    expect(formattedLines.minDays.days).toBe(1)
+    expect(formattedLines.minDays.days).toBe(0)
     expect(formattedLines.minDays.validity).toBe('EXPIRED')
 
     let validity = { 0: 133, 14: 2, 30: 3, 60: 118, 120: 0, 127: 0}
