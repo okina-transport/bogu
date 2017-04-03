@@ -35,6 +35,7 @@ if(TARGET === 'build') {
     },
     externals: [{
       react: 'react',
+      moment: 'moment',
     }],
     output: {
       filename: '[name].js',
