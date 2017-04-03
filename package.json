@@ -8,9 +8,9 @@
     "ninkasi"
   ],
   "scripts": {
-    "build": "webpack --progress --colors --display-error-details",
+    "build": "BABEL_ENV=production webpack --progress --colors --display-error-details",
     "dev": "webpack-dev-server",
-    "test": "./node_modules/mocha/bin/mocha -r jsdom-global/register --compilers js:babel-core/register ./tests/calculations.spec.js"
+    "test": "BABEL_ENV=production ./node_modules/mocha/bin/mocha -r jsdom-global/register --compilers js:babel-core/register ./tests/calculations.spec.js"
   },
   "author": "Morten Friesgaard",
   "license": "MIT",
