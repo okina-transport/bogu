@@ -1,4 +1,5 @@
 import moment from 'moment'
+import React from 'react'
 
 export const filterLines = (lineData, selectedSegment, daysValid) => {
   if (lineData.hasOwnProperty(selectedSegment)) {
