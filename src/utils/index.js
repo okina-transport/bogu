@@ -6,8 +6,8 @@ export const filterLines = (lineData, selectedSegment, daysValid) => {
   }
 
   for (let i in lineData.validity) {
-    let category = lineData.validity[i]
-    if (category.numDaysAtLeastValid == daysValid) {
+    const category = lineData.validity[i]
+    if (category.numDaysAtLeastValid === daysValid) {
       return category.lineNumbers
     }
   }
@@ -17,13 +17,52 @@ export const filterLines = (lineData, selectedSegment, daysValid) => {
   return lineData['all'].lineNumbers
 }
 
+export const sortLines = (sorting, lineData, selectedSegment, daysValid) => {
+  const order = filterLines(lineData, selectedSegment, daysValid)
+
+  switch (sorting) {
+    default:
+      return order
+    case 1:
+      return order.sort()
+    case 2:
+      return order.sort().reverse()
+    case 3:
+      let daysAsc = lineData.daysValid.slice().sort( this.sortMethod('days', true) )
+      return daysAsc.filter( (line) => order.indexOf(line.lineNumber) !== -1).map((line) => line.lineNumber)
+    case 4:
+      let daysDesc = lineData.daysValid.slice().sort( this.sortMethod('days', false) )
+      return daysDesc.filter( (line) => order.indexOf(line.lineNumber) !== -1 ).map( (line) => line.lineNumber)
+  }
+}
+
+export const sortIcon = (sorting) => {
+  let def = <svg  xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 24"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg>
+  let down = <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 24"><path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/></svg>
+  let up = <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+  let az = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18"><text x="12" y="12" textAnchor="middle">AZ</text></svg>
+  let za = <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18"><text x="12" y="12" textAnchor="middle">ZA</text></svg>
+  switch (sorting) {
+    default:
+    case 0:
+      return def
+    case 1:
+      return <div>{az}{down}</div>
+    case 2:
+      return <div>{za}{up}</div>
+    case 3:
+      return down
+    case 4:
+      return up
+  }
+}
 
 export const validity = (daysForward) => {
   if (daysForward > 127) {
     return 'VALID'
   } else if (daysForward >= 120) {
     return 'SOON_INVALID'
-  } else if (daysForward == 0) {
+  } else if (daysForward === 0) {
     return 'INVALID'
   }
   return 'EXPIRED'
