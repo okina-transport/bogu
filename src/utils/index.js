@@ -18,6 +18,18 @@ export const filterLines = (lineData, selectedSegment, daysValid) => {
   return lineData['all'].lineNumbers
 }
 
+export const sortMethod = ( index = 0, ascending = true) => {
+  return function (a, b) {
+    if (a[index] === b[index]) {
+      return 0
+    } else if (a[index] <  b[index]) {
+      return (ascending) ? -1 : 1
+    } else {
+      return (ascending) ? 1 : -1
+    }
+  }
+}
+
 export const sortLines = (sorting, lineData, selectedSegment, daysValid) => {
   const order = filterLines(lineData, selectedSegment, daysValid)
 
