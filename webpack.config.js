@@ -55,7 +55,7 @@ if(TARGET === 'build') {
 
 if(TARGET === 'dev') {
   const hostname = process.env.HOST || '127.0.0.1';
-  const port = process.env.PORT || 9000;
+  const port = process.env.PORT || 9011;
 
   module.exports = {
     devtool: 'inline-source-map',
