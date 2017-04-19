@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import HeaderTimeline from '../src/components/HeaderTimeline';
+import { HeaderTimeline, Timeline} from '../src/components/'
+import { formatLineStats, sortLines } from '../src/utils'
+import lineStatsNorland from '../tests/mock/lineStatsNorland'
 
-class App extends Component{
+class App extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       json: undefined,
       text: undefined,
@@ -14,19 +16,43 @@ class App extends Component{
   }
 
   render () {
-    let effectivePeriods = [
-      {"from": "2016-07-0", "to": "2017-01-30"},
-      {"from": "2017-02-01", "to": "2017-02-03"},
-      {"from": "2017-04-01", "to": "2017-05-03"},
-      ];
+    const list = { ... lineStatsNorland }
+    const formattedLines = formatLineStats(list)
+    const linesMap = formattedLines.linesMap
+    const validDaysOffset = formattedLines.validDaysOffset
+    const validFromDate = formattedLines.validFromDate
+    const daysValid = formattedLines.daysValid
+    const order = sortLines(0, formattedLines, 'all', daysValid)
 
     return (
       <div>
-        HeaderTimelien test
-      <HeaderTimeline hoverText="Hovertext example 2017-12-10" index={0} validDaysOffset={33} effectivePeriods={effectivePeriods} validFromDate="2017-05-18"/>
+        <h1>HeaderTimeline test</h1>
+        {
+          order.map( (line, index) => (
+            <div>
+              <HeaderTimeline line={line}
+                              hoverText={linesMap[line].lineNames.join(', ')}
+                              index={index}
+                              key={'HeaderTimeline'+index}
+                              validDaysOffset={validDaysOffset}
+                              validFromDate={validFromDate}
+                              effectivePeriods={linesMap[line].effectivePeriods}/>
+              {
+                linesMap[line].lines.map( (l, i) => (
+                  <Timeline
+                    key={'timelineItem'+index+'-'+i}
+                    timetables={l.timetables}
+                    isLast={i === linesMap[line].lines.length-1}
+                    validDaysOffset={validDaysOffset}
+                  />
+                ))
+              }
+            </div>
+          ))
+        }
       </div>
     );
   }
 }
 
-export default App;
+export default App
