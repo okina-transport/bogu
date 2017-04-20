@@ -82,7 +82,7 @@ export default {
   }, {
     "lineNumber": "18-112",
     "lineNames": ["Fuglestad-Terråk-Årsandøy"],
-    "effectivePeriods": [{"from": "2016-07-01", "to": "2017-01-30"}, {"from": "2017-02-01", "to": "2017-05-03"}],
+    "effectivePeriods": [{"from": "2016-07-01", "to": "2017-01-30"}, {"from": "2017-02-01", "to": "2018-05-03"}],
     "lines": [{
       "id": 4156,
       "objectId": "NOR:Line:8112-2017-02-01",
@@ -90,7 +90,7 @@ export default {
       "timetables": [{
         "id": 644,
         "objectId": "NOR:Timetable:1840226-2017-02-01",
-        "periods": [{"from": "2017-02-01", "to": "2017-05-03"}]
+        "periods": [{"from": "2017-02-01", "to": "2018-05-03"}]
       }]
     }, {
       "id": 5674,
