@@ -69,6 +69,7 @@ class HeaderTimeline extends React.Component {
 
       const textStyle = {
         color: color.font.inverse,
+        fontSize: '12px',
         height: 18,
         display: 'flex',
         flexDirection: 'column',
