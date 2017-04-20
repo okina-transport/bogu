@@ -31,7 +31,7 @@ export default {
   }, {
     "lineNumber": "100",
     "lineNames": ["Linje 100"],
-    "effectivePeriods": [{"from": "2016-07-01", "to": "2017-01-30"}, {"from": "2017-02-01", "to": "2017-05-03"}],
+    "effectivePeriods": [{"from": "2016-07-01", "to": "2017-01-30"}, {"from": "2017-02-01", "to": "2017-05-20"}],
     "lines": [{
       "id": 4150,
       "objectId": "NOR:Line:8100-2017-02-01",
@@ -40,7 +40,12 @@ export default {
         "id": 634,
         "objectId": "NOR:Timetable:1840074-2017-02-01",
         "periods": [{"from": "2017-02-01", "to": "2017-05-03"}]
-      }]
+      },
+        {
+          "id": 6341,
+          "objectId": "NOR:Timetable:1840075-2017-02-01",
+          "periods": [{"from": "2017-04-07", "to": "2017-05-20"}]
+        }]
     }, {
       "id": 5667,
       "objectId": "NOR:Line:8100-2016-07-01",
