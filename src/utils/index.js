@@ -86,55 +86,63 @@ export const segmentColor = (daysValid, modifier = 0) => {
   return '#FF' + green.toString(16) +'00'
 }
 
-export const segmentName = (segment, numDays) => {
-  if (segmentMap.hasOwnProperty(segment) && segment !== 'dynamic') {
-    return segmentMap[segment]
+export const segmentName = (segment, numDays, locale) => {
+  if (segmentMap(locale).hasOwnProperty(segment) && segment !== 'dynamic') {
+    return segmentMap(locale)[segment]
   }
 
-  return segmentMap['dynamic'].replace('DAYS', numDays)
+  return segmentMap(locale)['dynamic'].replace('DAYS', numDays)
 }
 
-export const segmentName2Key = (segmentName) => {
-  if (!text2key.hasOwnProperty(segmentName)) {
+export const segmentName2Key = (segmentName, locale) => {
+  if (!text2key(locale).hasOwnProperty(segmentName)) {
     let idxStart = segmentName.indexOf('- ') + 2
     let idxEnd = segmentName.indexOf(' dager')
 
     return {segment: 'dynamic', daysValid: parseInt(segmentName.substring(idxStart, idxEnd))}
   }
-  return {segment: text2key[segmentName], daysValid: 0}
+  return {segment: text2key(locale)[segmentName], daysValid: 0}
 }
 
-const segmentMap = {
-  'valid' : 'Linjer i gyldig periode',
-  'soonInvalid' : 'Linjer med gyldighetsperiode som snart utgår',
-  'invalid' : 'Linjer med manglende gyldighetsperiode',
-  'all' : 'Alle linjer',
-  'dynamic': 'Utgåtte linjer - DAYS dager igjen'
+const segmentMap = (locale) => {
+  switch (locale) {
+    case 'nb':
+      return {
+        'valid' : 'Linjer i gyldig periode',
+        'soonInvalid' : 'Linjer med gyldighetsperiode som snart utgår',
+        'invalid' : 'Linjer med manglende gyldighetsperiode',
+        'all' : 'Alle linjer',
+        'dynamic': 'Utgåtte linjer - DAYS dager igjen',
+      }
+    default:
+    case 'en':
+      return {
+        'valid' : 'Valid lines',
+        'soonInvalid' : 'Valid lines that are soon expiring',
+        'invalid' : 'Invalid lines',
+        'all' : 'All lines',
+        'dynamic': 'Expired lines - DAYS days left'
+      }
+  }
 }
 
-const text2key = {
-  'Alle linjer' : 'all',
-  'Linjer i gyldig periode' : 'valid',
-  'Linjer med gyldighetsperiode som snart utgår' : 'soonInvalid',
-  'Linjer med manglende gyldighetsperiode' : 'invalid',
+const text2key = (locale) => {
+  switch (locale) {
+    case 'nb':
+      return {
+        'Alle linjer' : 'all',
+        'Linjer i gyldig periode' : 'valid',
+        'Linjer med gyldighetsperiode som snart utgår' : 'soonInvalid',
+        'Linjer med manglende gyldighetsperiode' : 'invalid',
+      }
+    default:
+    case 'en':
+      return {'All lines' : 'all',
+        'Valid lines' : 'valid',
+        'Valid lines that are soon expiring' : 'soonInvalid',
+        'Invalid lines' : 'invalid',}
+  }
 }
-
-/*
-const segmentMap = {
-  'valid' : 'Valid lines',
-  'soonInvalid' : 'Valid lines that are soon expiring',
-  'invalid' : 'Invalid lines',
-  'all' : 'All lines',
-  'dynamic': 'Expired lines - DAYS days left'
-}
-
-const text2key = {
-  'All lines' : 'all',
-  'Valid lines' : 'valid',
-  'Valid lines that are soon expiring' : 'soonInvalid',
-  'Invalid lines' : 'invalid',
-}
-*/
 
 const validPeriod = (endDate, from, to) => (moment(endDate).add(1, 'days').isBetween(from, to, 'days', '[]')) ? to : endDate
 
