@@ -11,13 +11,10 @@ class Timeline extends React.Component {
 
       const { timetables, validDaysOffset, isLast } = this.props
 
-      let { periods } = timetables[0]
-
       const timelineStyle = {
         border: '1px solid black',
         borderRadius: 5,
         background: color.timeLineBackground,
-        height: 18,
         width: dimension.timeLineWidth + '%',
         margin: 'auto',
         display: 'block',
@@ -39,10 +36,12 @@ class Timeline extends React.Component {
 
       let textStyle = {
         whiteSpace: 'nowrap',
-        overflow: 'hidden',
+        overflow: 'visble',
+        textShadow: '0px 0px 5px black',
         textOverflow: 'ellipsis',
         display: 'block',
         margin: 'auto 10px',
+        lineHeight: '18px',
         color: color.font.inverse,
         fontSize: '0.7em',
         fontWeight: 500
@@ -64,15 +63,19 @@ class Timeline extends React.Component {
           <div style={timelineStyle}>
             <hr style={hrStyle}/>
             {
-              periods.map( (period, index) => {
-                let periodBlock = {...timeBlock}
-                periodBlock.width = (period.timelineEndPosition - period.timelineStartPosition) + '%'
-                periodBlock.marginLeft = (period.timelineStartPosition + '%')
-                return (
-                  <div key={'timetable-period-'+index} style={periodBlock} title={timetables[0].objectId}>
-                    <div style={textStyle}>{timetables[0].objectId}</div>
-                  </div>)
-              })
+              timetables.map( timetable =>
+                timetable.periods.map((period, index) => {
+                  const title = timetable.objectId
+                  const hover = `${title} \n(period: ${period.from} -> ${period.to})`
+                  let periodBlock = {...timeBlock}
+                  periodBlock.width = (period.timelineEndPosition - period.timelineStartPosition) + '%'
+                  periodBlock.marginLeft = (period.timelineStartPosition + '%')
+                  return (
+                    <div key={'timetable-period-'+index} style={periodBlock} title={hover}>
+                      <div style={textStyle}>{title}</div>
+                    </div>)
+                })
+              )
             }
           </div>
         </div>
