@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { color } from '../styles'
+import { color, dimension } from '../styles'
 
 class HeaderTimeline extends React.Component {
 
@@ -30,9 +30,10 @@ class HeaderTimeline extends React.Component {
         border: '1px solid black',
         borderRadius: 5,
         background: color.timeLineFail,
-        height: 18,
-        width: '85%',
-        margin: 'auto',
+        height: '18px',
+        lineHeight: '18px',
+        width: dimension.timeLineWidth + '%',
+        margin: '10px auto',
         display: 'block',
         overflow: 'hidden',
         fontSize: '0%',
@@ -66,7 +67,7 @@ class HeaderTimeline extends React.Component {
         zIndex: 99,
       }
 
-      const textSpanStyle = {
+      const textStyle = {
         color: color.font.inverse,
         height: 18,
         display: 'flex',
@@ -81,37 +82,37 @@ class HeaderTimeline extends React.Component {
       const { effectivePeriods, validDaysOffset } = this.props
 
       let hrStyle = {
-        transform: 'rotate(90deg) translateX(20px)',
+        transform: 'rotate(90deg) translateY(7.5px)',
         borderTop: '1px dotted',
         borderColor: color.border,
         marginTop: 9,
         width: 15,
-        position: 'relative',
+        position: 'absolute',
       }
 
-      hrStyle.marginLeft = (33 + validDaysOffset) + '%'
+      hrStyle.marginLeft = (33 + validDaysOffset) * (dimension.timeLineWidth - 1)/100 + '%'
 
       let hoverText = effectivePeriods.length ?  this.props.hoverText : 'Ugyldig linje. Mangler data'
 
       return (
         <div style={timelineWrapper}>
         <div
-            style={{display: 'inline-block', cursor: 'pointer', transform: 'translate(12px, 30px)', fontSize: '1.2em', color: effectivePeriods.length ? color.effective : color.fail}}
+            style={{display: 'inline-block', cursor: 'pointer', transform: 'translate(10px, 20px)', fontSize: '1.2em', color: effectivePeriods.length ? color.effective : color.fail}}
             onMouseOver={this.handleToggleToolTip.bind(this)}
             onMouseLeave={this.handleToggleToolTip.bind(this)}
             >
             {this.props.line}
             {this.state.showTooltip && <div style={toolTipStyle}> {hoverText} </div>}
           </div>
-            <hr style={hrStyle}/>
             <div style={timelineStyle}>
             <div key={'timeline-header-wrapper'+this.props.index}>
+            <hr style={hrStyle}/>
             { effectivePeriods.map( (effectivePeriod, index) => {
 
                 let periodBlock = {...timeBlock}
                 periodBlock.width = (effectivePeriod.timelineEndPosition - effectivePeriod.timelineStartPosition) + '%'
 
-                if (index == 0) {
+                if (index === 0) {
                   periodBlock.marginLeft = (effectivePeriod.timelineStartPosition + '%')
                 } else {
                   periodBlock.marginLeft = (effectivePeriod.timelineStartPosition - effectivePeriods[index-1].timelineEndPosition) + '%'
@@ -127,7 +128,7 @@ class HeaderTimeline extends React.Component {
                     <div
                       key={'timeline-header-block'+index}
                       style={periodBlock}>
-                      <div style={textSpanStyle}>
+                      <div style={textStyle}>
                           <div className="period-block" style={{height: '100%', color: color.font.inverse, verticalAlign: 'middle'}} title={itemText}>{itemText}</div>
                       </div>
                     </div>

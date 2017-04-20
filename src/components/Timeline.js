@@ -1,5 +1,5 @@
 import React from 'react'
-import { color } from '../styles'
+import { color, dimension } from '../styles'
 
 class Timeline extends React.Component {
 
@@ -17,12 +17,11 @@ class Timeline extends React.Component {
         border: '1px solid black',
         borderRadius: 5,
         background: color.timeLineBackground,
-        height: '100%',
-        width: '85%',
+        height: 18,
+        width: dimension.timeLineWidth + '%',
         margin: 'auto',
         display: 'block',
         overflowY: 'auto',
-        marginBottom: isLast ? -15 : 'auto'
       }
 
       const timelineWrapper = {
@@ -50,20 +49,20 @@ class Timeline extends React.Component {
       }
 
       let hrStyle = {
-        transform: 'rotate(90deg)',
+        transform: 'rotate(90deg) translateY(7.5px)',
         borderTop: '1px dotted',
         borderColor: color.border,
-        width: 15,
         marginTop: 9,
+        width: 15,
         position: 'absolute'
       }
 
-      hrStyle.marginLeft = (33 + validDaysOffset) + '%'
+      hrStyle.marginLeft = (33 + validDaysOffset) * (dimension.timeLineWidth - 1)/100 + '%'
 
       return (
         <div style={timelineWrapper}>
-          <hr style={hrStyle}/>
           <div style={timelineStyle}>
+            <hr style={hrStyle}/>
             {
               periods.map( (period, index) => {
                 let periodBlock = {...timeBlock}
