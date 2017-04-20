@@ -58,7 +58,7 @@ export const color = {
 }
 
 export const dimension = {
-
+  timeLineWidth: 85,
 }
 
 export const styles = {
