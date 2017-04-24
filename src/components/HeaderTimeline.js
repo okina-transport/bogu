@@ -38,6 +38,7 @@ class HeaderTimeline extends React.Component {
         display: 'block',
         overflow: 'hidden',
         fontSize: '0%',
+        position: 'relative',
       }
 
       let timelineWrapper = {
@@ -84,15 +85,13 @@ class HeaderTimeline extends React.Component {
       const { effectivePeriods, validDaysOffset } = this.props
 
       let hrStyle = {
-        transform: 'rotate(90deg) translateY(7.5px)',
-        borderTop: '1px dotted',
-        borderColor: color.border,
-        marginTop: 9,
-        width: 15,
+        background: 'black',
+        width: '1px',
+        height: '18px',
         position: 'absolute',
       }
 
-      hrStyle.marginLeft = (33 + validDaysOffset) * (dimension.timeLineWidth - 1)/100 + '%'
+      hrStyle.marginLeft = (33 + validDaysOffset) + '%'
 
       let hoverText = effectivePeriods.length ?  this.props.hoverText : 'Ugyldig linje. Mangler data'
 
@@ -108,7 +107,7 @@ class HeaderTimeline extends React.Component {
           </div>
             <div className={styles.timeline} style={timelineStyle}>
             <div key={'timeline-header-wrapper'+this.props.index}>
-            <hr style={hrStyle}/>
+            <div style={hrStyle}/>
             { effectivePeriods.map( (effectivePeriod, index) => {
 
                 let periodBlock = {...timeBlock}

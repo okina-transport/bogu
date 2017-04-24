@@ -19,6 +19,7 @@ class Timeline extends React.Component {
         margin: 'auto',
         display: 'block',
         overflowY: 'auto',
+        position: 'relative',
       }
 
       const timelineWrapper = {
@@ -48,19 +49,18 @@ class Timeline extends React.Component {
       }
 
       let hrStyle = {
-        transform: 'rotate(90deg) translateY(8px)',
-        borderTop: '1px dotted',
-        borderColor: color.border,
-        marginTop: 9,
-        width: 16,
-        position: 'absolute'
+        background: 'black',
+        width: '1px',
+        height: '100%',
+        position: 'absolute',
       }
 
-      hrStyle.marginLeft = (33 + validDaysOffset) * (dimension.timeLineWidth - 1)/100 + '%'
+      hrStyle.marginLeft = (33 + validDaysOffset) + '%'
 
       return (
         <div style={timelineWrapper}>
           <div style={timelineStyle}>
+            <div style={hrStyle}/>
             {
               timetables.map( timetable =>
                 timetable.periods.map((period, index) => {
@@ -71,7 +71,6 @@ class Timeline extends React.Component {
                   periodBlock.marginLeft = (period.timelineStartPosition + '%')
                   return (
                     <div>
-                      <hr style={hrStyle}/>
                       <div key={'timetable-period-'+index} style={periodBlock} title={hover}>
                         <div style={textStyle}>{title}</div>
                       </div>
