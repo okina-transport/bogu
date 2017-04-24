@@ -71,12 +71,12 @@ export const sortIcon = (sorting) => {
 }
 
 export const validity = (daysForward) => {
-  if (daysForward > 127) {
+  if (daysForward === Infinity || daysForward === 0) {
+    return 'INVALID'
+  } else if (daysForward > 127) {
     return 'VALID'
   } else if (daysForward >= 120) {
     return 'SOON_INVALID'
-  } else if (daysForward === 0) {
-    return 'INVALID'
   }
   return 'EXPIRED'
 }
