@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import { color, dimension } from '../styles'
 
+import styles from './HeaderTimeline.css'
+
 class HeaderTimeline extends React.Component {
 
   static propTypes = {
@@ -29,7 +31,6 @@ class HeaderTimeline extends React.Component {
       const timelineStyle = {
         border: '1px solid black',
         borderRadius: 5,
-        background: color.timeLineFail,
         height: '18px',
         lineHeight: '18px',
         width: dimension.timeLineWidth + '%',
@@ -68,6 +69,7 @@ class HeaderTimeline extends React.Component {
 
       const textStyle = {
         color: color.font.inverse,
+        textShadow: '0px 0px 5px black',
         fontSize: '12px',
         height: 18,
         display: 'flex',
@@ -104,7 +106,7 @@ class HeaderTimeline extends React.Component {
             {this.props.line}
             {this.state.showTooltip && <div style={toolTipStyle}> {hoverText} </div>}
           </div>
-            <div style={timelineStyle}>
+            <div className={styles.timeline} style={timelineStyle}>
             <div key={'timeline-header-wrapper'+this.props.index}>
             <hr style={hrStyle}/>
             { effectivePeriods.map( (effectivePeriod, index) => {

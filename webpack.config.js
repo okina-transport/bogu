@@ -30,7 +30,12 @@ if(TARGET === 'build') {
             path.resolve(__dirname, 'src/utils'),
           ],
           loader: 'babel-loader'
-        }
+        },
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          loader: 'style-loader!css-loader?modules=true'
+        },
       ]
     },
     externals: [{
@@ -81,7 +86,12 @@ if(TARGET === 'dev') {
           exclude: /node_modules/,
           include: __dirname,
           loader: ['babel-loader']
-        }
+        },
+        {
+          test: /\.css$/,
+          exclude: /node_modules/,
+          loader: 'style-loader!css-loader?modules=true'
+        },
       ]
     },
     devServer: {
