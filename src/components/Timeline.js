@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { color, dimension } from '../styles'
+
+const period = PropTypes.shape({
+  from: PropTypes.string.isRequired,
+  to: PropTypes.string.isRequired,
+  timelineStartPosition: PropTypes.number.isRequired,
+  timelineEndPosition: PropTypes.number.isRequired,
+});
+
+const timetable = PropTypes.shape({
+  objectId: PropTypes.string.isRequired,
+  periods: PropTypes.arrayOf(period).isRequired,
+}).isRequired;
 
 class Timeline extends React.Component {
 
-  constructor(props) {
-    super(props)
+  static propTypes = {
+    timetables: PropTypes.arrayOf(timetable).isRequired,
+    isLast: PropTypes.bool.isRequired,
+    validDaysOffset: PropTypes.number.isRequired,
   }
 
   render() {
