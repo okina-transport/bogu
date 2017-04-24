@@ -153,7 +153,7 @@ const getDaysRange = (startDate, end = 0) => moment.isMoment(end) ? end.diff(sta
 const minDays = (lineNumber2Days) => {
   let days = Math.min(...lineNumber2Days.map( line => line.days))
   return {
-    days: days,
+    days: days === Infinity ? 0 : days,
     validity: validity(days)
   }
 }
