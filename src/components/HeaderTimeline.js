@@ -27,6 +27,7 @@ class HeaderTimeline extends React.Component {
   }
 
   render() {
+      const { effectivePeriods, validDaysOffset } = this.props
 
       const timelineStyle = {
         border: '1px solid black',
@@ -39,12 +40,11 @@ class HeaderTimeline extends React.Component {
         overflow: 'hidden',
         fontSize: '0%',
         position: 'relative',
-        zIndex: -1,
       }
 
       let timelineWrapper = {
         width: '100%',
-        marginBottom: 2
+        marginBottom: 2,
       }
 
       let timeBlock = {
@@ -55,6 +55,16 @@ class HeaderTimeline extends React.Component {
         fontSize: '0.8rem',
         textAlign: 'center',
         display: 'inline-block',
+      }
+
+      const titleText = {
+        position: 'relative',
+        display: 'inline-block',
+        cursor: 'pointer',
+        transform: 'translate(10px, 20px)',
+        fontSize: '1.2em',
+        color: effectivePeriods.length ? color.effective : color.fail,
+        zIndex: 99,
       }
 
       const toolTipStyle = {
@@ -83,23 +93,20 @@ class HeaderTimeline extends React.Component {
         textOverflow: 'ellipsis',
       }
 
-      const { effectivePeriods, validDaysOffset } = this.props
-
       let hrStyle = {
         background: 'black',
         width: '1px',
         height: '18px',
         position: 'absolute',
+        marginLeft: (33 + validDaysOffset) + '%'
       }
-
-      hrStyle.marginLeft = (33 + validDaysOffset) + '%'
 
       let hoverText = effectivePeriods.length ?  this.props.hoverText : 'Ugyldig linje. Mangler data'
 
       return (
         <div style={timelineWrapper}>
         <div
-            style={{display: 'inline-block', cursor: 'pointer', transform: 'translate(10px, 20px)', fontSize: '1.2em', color: effectivePeriods.length ? color.effective : color.fail}}
+            style={titleText}
             onMouseOver={this.handleToggleToolTip.bind(this)}
             onMouseLeave={this.handleToggleToolTip.bind(this)}
             >
