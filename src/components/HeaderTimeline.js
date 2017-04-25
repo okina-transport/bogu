@@ -39,6 +39,7 @@ class HeaderTimeline extends React.Component {
         overflow: 'hidden',
         fontSize: '0%',
         position: 'relative',
+        zIndex: -1,
       }
 
       let timelineWrapper = {
