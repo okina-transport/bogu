@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Card, CardText } from 'material-ui/Card'
 import { List, ListItem } from 'material-ui/List'
 import IconButton from 'material-ui/IconButton'
-import CloseButton from 'material-ui/svg-icons/navigation/close';
+import CloseButton from 'material-ui/svg-icons/navigation/close'
 
 import Timeline from '../components/Timeline'
 import HeaderTimeline from '../components/HeaderTimeline'
@@ -28,7 +28,7 @@ class LineStatsCard extends React.Component {
   }
 
   handleToggleListItem(line) {
-    let isOpen = !this.state['open'+line];
+    let isOpen = !this.state['open'+line]
     this.saveNestedState(isOpen, line)
   }
 

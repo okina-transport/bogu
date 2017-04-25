@@ -6,12 +6,12 @@ const period = PropTypes.shape({
   to: PropTypes.string.isRequired,
   timelineStartPosition: PropTypes.number.isRequired,
   timelineEndPosition: PropTypes.number.isRequired,
-});
+})
 
 const timetable = PropTypes.shape({
   objectId: PropTypes.string.isRequired,
   periods: PropTypes.arrayOf(period).isRequired,
-}).isRequired;
+}).isRequired
 
 class Timeline extends React.Component {
 
