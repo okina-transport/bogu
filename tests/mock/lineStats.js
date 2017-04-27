@@ -2,9 +2,9 @@ export default {
   "startDate": "2016-10-31",
   "days": 180,
   "validityCategories": [{
-    "numDaysAtLeastValid": 0,
+    "numDaysAtLeastValid": 0, "name": "INVALID",
     "lineNumbers": ["142", "151", "260", "262", "301", "343", "382", "385", "388", "420", "421", "460", "461", "538", "541", "542", "580", "657", "661"]
-  }, {"numDaysAtLeastValid": 127, "lineNumbers": []}, {"numDaysAtLeastValid": 120, "lineNumbers": []}],
+  }, {"numDaysAtLeastValid": 120, "name": "VALID", "lineNumbers": []}],
   "publicLines": [{
     "lineNumber": "142",
     "lineNames": ["Bismo-Otta-Lillehammer-Oslo"],

@@ -122,13 +122,14 @@ describe('Days valid calculation', () => {
     expect(formattedLines.minDays.days).toBe(0)
     expect(formattedLines.minDays.validity).toBe('INVALID')
 
-    let validity = { 0: 133, 14: 2, 30: 3, 60: 118, 120: 0, 127: 0}
+    let validity = { 0: 256, 14: 0, 30: 0, 60: 0, 120: 0, 127: 0}
+    validity[-1] = 0
     for (let [key, value] of Object.entries(formattedLines.validity)) {
       expect(value.lineNumbers.length).toBe(validity[value.numDaysAtLeastValid])
     }
-    expect(formattedLines.invalid.lineNumbers.length).toBe(validity[0])
-    expect(formattedLines.valid.lineNumbers.length).toBe(validity[127])
-    expect(formattedLines.soonInvalid.lineNumbers.length).toBe(validity[120])
+    expect(formattedLines.invalid.lineNumbers.length).toBe(validity[-1])
+    expect(formattedLines.valid.lineNumbers.length).toBe(validity[120])
+    expect(formattedLines.expiring.lineNumbers.length).toBe(validity[0])
     expect(formattedLines.all.lineNumbers.length).toBe(Object.values(validity).reduce( (a, b) => a+b))
 
     let line18159 = formattedLines.linesMap['18-159']

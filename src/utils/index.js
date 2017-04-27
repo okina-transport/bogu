@@ -71,14 +71,12 @@ export const sortIcon = (sorting) => {
 }
 
 export const validity = (daysForward) => {
-  if (daysForward === Infinity || daysForward === 0) {
+  if (daysForward < 0 || daysForward === Infinity) {
     return 'INVALID'
-  } else if (daysForward > 127) {
-    return 'VALID'
   } else if (daysForward >= 120) {
-    return 'SOON_INVALID'
+    return 'VALID'
   }
-  return 'EXPIRED'
+  return 'EXPIRING'
 }
 
 export const segmentColor = (daysValid, modifier = 0) => {
@@ -108,20 +106,20 @@ const segmentMap = (locale) => {
   switch (locale) {
     case 'nb':
       return {
-        'valid' : 'Gyldige linjer',
-        'soonInvalid' : 'Utgående linjer',
-        'invalid' : 'Utgåtte linjer',
         'all' : 'Alle linjer',
-        'dynamic': 'Utgåtte linjer (< DAYS dager)',
+        'valid' : 'Gyldige linjer',
+        'expiring' : 'Utgående linjer',
+        'invalid' : 'Utgåtte linjer',
+        'dynamic': 'Utgående linjer (< DAYS dager)',
       }
     default:
     case 'en':
       return {
-        'valid' : 'Valid lines',
-        'soonInvalid' : 'Expiring lines',
-        'invalid' : 'Invalid lines',
         'all' : 'All lines',
-        'dynamic': 'Expired lines (< DAYS days)'
+        'valid' : 'Valid lines',
+        'expiring' : 'Expiring lines',
+        'invalid' : 'Invalid lines',
+        'dynamic': 'Expiring lines (< DAYS days)'
       }
   }
 }
@@ -131,16 +129,18 @@ const text2key = (locale) => {
     case 'nb':
       return {
         'Alle linjer' : 'all',
-        'Linjer i gyldig periode' : 'valid',
-        'Linjer med gyldighetsperiode som snart utgår' : 'soonInvalid',
-        'Linjer med manglende gyldighetsperiode' : 'invalid',
+        'Gyldige linjer' : 'valid',
+        'Utgående linjer' : 'expiring',
+        'Utgåtte linjer' : 'invalid',
       }
     default:
     case 'en':
-      return {'All lines' : 'all',
+      return {
+        'All lines' : 'all',
         'Valid lines' : 'valid',
-        'Valid lines that are soon expiring' : 'soonInvalid',
-        'Invalid lines' : 'invalid',}
+        'Expiring lines' : 'expiring',
+        'Invalid lines' : 'invalid',
+      }
   }
 }
 
@@ -160,6 +160,9 @@ const minDays = (lineNumber2Days) => {
 
 const sortValidity = validity => validity.sort( (a, b) => a['numDaysAtLeastValid'] < b['numDaysAtLeastValid'] ? -1 : 1)
 
+const lines = (lineStats, validity, defaultObject) =>
+  lineStats.validityCategories.find( category => category.name === validity ) || {validity, ... defaultObject}
+
 export const formatLineStats = lineStats => {
 
   try {
@@ -167,12 +170,9 @@ export const formatLineStats = lineStats => {
     const defaultObject = { lineNumbers: [] }
 
     let formattedLines = {
-      invalid: lineStats.validityCategories
-        .filter( (category) => category.numDaysAtLeastValid < 120)[0] || defaultObject,
-      valid: lineStats.validityCategories
-        .filter( (category) => category.numDaysAtLeastValid >= 127)[0] || defaultObject,
-      soonInvalid: lineStats.validityCategories
-        .filter( (category) => (category.numDaysAtLeastValid >= 120 && category.numDaysAtLeastValid < 127))[0] || defaultObject,
+      invalid: lines(lineStats, "INVALID", defaultObject),
+      valid: lines(lineStats, "VALID", defaultObject),
+      expiring: lines(lineStats, "EXPIRING", defaultObject),
       validity: sortValidity(lineStats.validityCategories),
       all: defaultObject
     }
