@@ -96,8 +96,8 @@ export const segmentName = (segment, numDays, locale) => {
 
 export const segmentName2Key = (segmentName, locale) => {
   if (!text2key(locale).hasOwnProperty(segmentName)) {
-    let idxStart = segmentName.indexOf('- ') + 2
-    let idxEnd = segmentName.indexOf(' dager')
+    let idxStart = segmentName.indexOf('< ') + 2
+    let idxEnd = segmentName.indexOf(' da')
 
     return {segment: 'dynamic', daysValid: parseInt(segmentName.substring(idxStart, idxEnd))}
   }
@@ -108,20 +108,20 @@ const segmentMap = (locale) => {
   switch (locale) {
     case 'nb':
       return {
-        'valid' : 'Linjer i gyldig periode',
-        'soonInvalid' : 'Linjer med gyldighetsperiode som snart utgår',
-        'invalid' : 'Linjer med manglende gyldighetsperiode',
+        'valid' : 'Gyldige linjer',
+        'soonInvalid' : 'Utgående linjer',
+        'invalid' : 'Utgåtte linjer',
         'all' : 'Alle linjer',
-        'dynamic': 'Utgåtte linjer - DAYS dager igjen',
+        'dynamic': 'Utgåtte linjer (< DAYS dager)',
       }
     default:
     case 'en':
       return {
         'valid' : 'Valid lines',
-        'soonInvalid' : 'Valid lines that are soon expiring',
+        'soonInvalid' : 'Expiring lines',
         'invalid' : 'Invalid lines',
         'all' : 'All lines',
-        'dynamic': 'Expired lines - DAYS days left'
+        'dynamic': 'Expired lines (< DAYS days)'
       }
   }
 }
