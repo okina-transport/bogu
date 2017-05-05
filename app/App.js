@@ -1,57 +1,59 @@
 import React, { Component } from 'react'
-
-import { HeaderTimeline, Timeline} from '../src/components/'
-import { formatLineStats, sortLines } from '../src/utils'
-import lineStatsNorland from '../tests/mock/lineStatsNorland'
+import HeaderTimeLineExample from './Examples/HeaderTimeline'
+import EventsExample from './Examples/EventsExample'
 
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      json: undefined,
-      text: undefined,
-      errorText: undefined
+      activeExampleIndex: 0
     }
   }
 
   render () {
-    const list = { ... lineStatsNorland }
-    const formattedLines = formatLineStats(list)
-    const linesMap = formattedLines.linesMap
-    const validDaysOffset = formattedLines.validDaysOffset
-    const validFromDate = formattedLines.validFromDate
-    const daysValid = formattedLines.daysValid
-    const order = sortLines(0, formattedLines, 'all', daysValid)
+
+    const { activeExampleIndex } = this.state
+
+    const buttonStyle = {
+      padding: 10,
+      marginLeft: 10,
+      color: '#000',
+      borderRadius: 10,
+      border: '1px solid #000',
+      cursor: 'pointer',
+      height: 14
+    }
+
+    const activeButtonStyle = {
+      background: '#0096ff',
+      color: '#fff'
+    }
 
     return (
       <div>
-        <h1>HeaderTimeline test</h1>
-        <div style={{overflowY: 'scroll', overflowX: 'hidden', margin: 'auto', width: '100%'}}>
-          {
-            order.map( (line, index) => (
-              <div style={{padding: 0, marginLeft: 0, marginRight: 0, marginTop: 0, lineHeight: 0}}>
-                <HeaderTimeline line={line}
-                                hoverText={linesMap[line].lineNames.join(', ')}
-                                index={index}
-                                key={'HeaderTimeline'+index}
-                                validDaysOffset={validDaysOffset}
-                                validFromDate={validFromDate}
-                                effectivePeriods={linesMap[line].effectivePeriods}/>
-                {
-                  linesMap[line].lines.map( (l, i) => (
-                    <Timeline
-                      key={'timelineItem'+index+'-'+i}
-                      timetables={l.timetables}
-                      isLast={i === linesMap[line].lines.length-1}
-                      validDaysOffset={validDaysOffset}
-                    />
-                  ))
-                }
-              </div>
-            ))
-          }
+        <div style={{width: '100%', textAlign: 'center', display: 'flex', justifyContent: 'center'}}>
+          <div
+            style={activeExampleIndex === 0 ? { ... buttonStyle, ...activeButtonStyle } : buttonStyle}
+            onClick={() => this.setState({activeExampleIndex: 0})}
+          >
+            Timeline
+          </div>
+          <div
+            style={activeExampleIndex === 1 ? { ... buttonStyle, ...activeButtonStyle } : buttonStyle}
+            onClick={() => this.setState({activeExampleIndex: 1})}
+          >
+            Events
+          </div>
         </div>
+        { activeExampleIndex === 0
+          ? <HeaderTimeLineExample/>
+          : null
+        }
+        { activeExampleIndex === 1
+          ? <EventsExample/>
+          : null
+        }
       </div>
     )
   }

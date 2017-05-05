@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
-import ActionTranslations from '../translations/no/actions'
-const FaChevronDown = require('react-icons/lib/fa/chevron-down')
-const FaChevronUp  = require('react-icons/lib/fa/chevron-up')
+import ActionTranslations from './actionTranslations'
+import FaChevronDown from 'react-icons/lib/fa/chevron-down'
+import FaChevronUp from 'react-icons/lib/fa/chevron-up'
 import MdError from 'react-icons/lib/md/error'
 import MdDone from 'react-icons/lib/md/check-circle'
 import MdSchedule from 'react-icons/lib/md/schedule'
@@ -9,6 +9,7 @@ import FaCog from 'react-icons/lib/fa/cog'
 import MdHelpOutLine from 'react-icons/lib/md/help-outline'
 import MdHour from 'react-icons/lib/md/hourglass-empty'
 import ControlledChouetteLink from './ControlledChouetteLink'
+import translations from './translations'
 
 class EventStepper extends React.Component {
 
@@ -98,7 +99,7 @@ class EventStepper extends React.Component {
     formattedGroups[name] = combined
   }
 
-  bullet(formattedGroups, groups) {
+  bullet(formattedGroups, groups, locale) {
     const columnStyle = {
       display: 'flex',
       flexDirection: 'column',
@@ -111,17 +112,17 @@ class EventStepper extends React.Component {
         let event = formattedGroups[group]
         if (event instanceof Array) {
           column = Object.keys(event).map((key, i) => {
-            return this.renderEvent(event[key], event, key, i, false, i)
+            return this.renderEvent(event[key], event, key, i, false, i, locale)
           })
         } else {
-          column = this.renderEvent(event, groups, group, index, index === 0)
+          column = this.renderEvent(event, groups, group, index, index === 0, 0, locale)
         }
         return <div style={columnStyle}>{column}</div>
       }
     )
   }
 
-  renderEvent(event, groups, group, index, isFirst, columnIndex = 0) {
+  renderEvent(event, groups, group, index, isFirst, columnIndex = 0, locale) {
     const groupStyle = {
       display: "flex",
       flexDirection: "row",
@@ -145,9 +146,9 @@ class EventStepper extends React.Component {
 
     if (group === "FILE_CLASSIFICATION") return null
 
-    if (!ActionTranslations.states[event.endState]) return null
+    if (!ActionTranslations[locale].states[event.endState]) return null
 
-    let toolTipText = ActionTranslations.states[event.endState]
+    let toolTipText = ActionTranslations[locale].states[event.endState]
 
     if (event.states && event.states[groups[group].states.length-1]) {
       toolTipText += ' ' + event.states[event.states.length-1].date
@@ -160,7 +161,7 @@ class EventStepper extends React.Component {
           { this.getIconByState(event.endState) }
         </div>
         <div style={{...groupText, opacity: event.missingBeforeStartStart ? 0.2 : 1}}>
-          <ControlledChouetteLink events={event}> { ActionTranslations.text[group] } </ControlledChouetteLink>
+          <ControlledChouetteLink events={event}> { ActionTranslations[locale].text[group] } </ControlledChouetteLink>
         </div>
       </div>
     )
@@ -177,22 +178,22 @@ class EventStepper extends React.Component {
       marginTop: 10
     }
 
-    const { groups, listItem } = this.props
+    const { groups, listItem, locale } = this.props
     const { expanded } = this.state
 
     const formattedGroups = this.addUnlistedStates(groups)
     this.combine(formattedGroups, ['EXPORT', 'EXPORT_NETEX'], 'EXPORT')
-    const bullets = this.bullet(formattedGroups, groups)
+    const bullets = this.bullet(formattedGroups, groups, locale)
 
     return (
-      <div key={"event" + listItem.chouetteJobId} style={{marginLeft: 20, cursor: 'pointer'}} onClick={() => this.handleToggleVisibility()}>
-        <div style={{display: 'flex', marginLeft: -20}}>
-          <div title={"Varighet: " + listItem.duration} style={{fontSize: '0.9em', fontWeight: 600, color: '#e59400', marginTop: -8, marginRight: 20}}>{listItem.started}</div>
+      <div key={"event" + listItem.chouetteJobId} style={{margin: 'auto', width: '98%', cursor: 'pointer'}} onClick={() => this.handleToggleVisibility()}>
+        <div style={{display: 'flex', marginLeft: -15}}>
+          <div title={translations[locale].duration + listItem.duration} style={{fontSize: '0.9em', fontWeight: 600, color: '#e59400', marginTop: -8, marginRight: 20}}>{listItem.started}</div>
           { listItem.provider && listItem.provider.name ?
             <div style={{fontSize: '0.8em', fontWeight: 600, flex: 1}}>{listItem.provider.name}</div>
             : null
           }
-          <div style={{fontSize: '0.9em', fontWeight: 600, flex: 2}}>{listItem.fileName || ActionTranslations.filename.undefined}</div>
+          <div style={{fontSize: '0.9em', fontWeight: 600, flex: 2}}>{listItem.fileName || ActionTranslations[locale].filename.undefined}</div>
         </div>
         <div style={stepperstyle}>
           {bullets}
@@ -203,9 +204,9 @@ class EventStepper extends React.Component {
         { expanded
           ?
             <div style={{display: 'flex', padding: 8, flexDirection: 'column', lineHeight: '25px', marginTop: 10, cursor: 'default', border: '1px solid #9E9E9E'}} onClick={event => event.stopPropagation()}>
-              <div>Begynte: {listItem.firstEvent}</div>
-              <div>Avsluttet: {listItem.lastEvent}</div>
-              <div>Varighet: {listItem.duration}</div>
+              <div>{translations[locale].started} {listItem.firstEvent}</div>
+              <div>{translations[locale].ended}  {listItem.lastEvent}</div>
+              <div>{translations[locale].duration}  {listItem.duration}</div>
             </div>
           : null
         }

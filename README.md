@@ -21,6 +21,7 @@ Remember to build before releases.
 Checklist includes:
 * `npm run build`
 * `npm run test`
+* update package json `<version>`
 * `git commit ...`
 * `git tag <version>`
 * `git push && git push --tags`

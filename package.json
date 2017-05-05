@@ -1,6 +1,6 @@
 {
   "name": "bogu",
-  "version": "0.3.9",
+  "version": "0.4.0",
   "description": "Conjuntion of code in bel and ninkasi",
   "main": "index.js",
   "keywords": [
@@ -15,7 +15,9 @@
   "author": "Morten Friesgaard",
   "license": "MIT",
   "peerDependencies": {
-    "react": "^15.4.2"
+    "material-ui": "^0.18.0",
+    "react": "^15.4.2",
+    "react-icons": "^2.2.3"
   },
   "dependencies": {
     "moment": "^2.17.1"

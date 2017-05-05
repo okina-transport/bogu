@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import cfgreader from '../config/readConfig'
-import EventStepper from '../components/EventStepper'
+import EventStepper from './EventStepper'
+require('./EventDetails.css')
+const FaFresh = require('react-icons/lib/fa/refresh')
+import translations from './translations'
 
 class EventDetails extends React.Component {
 
@@ -9,12 +11,6 @@ class EventDetails extends React.Component {
     this.state = {
       activePageIndex: 0
     }
-  }
-
-  componentWillMount(){
-    cfgreader.readConfig( (function(config) {
-      window.config = config
-    }).bind(this))
   }
 
   handlePageClick (e, pageIndex) {
@@ -26,17 +22,21 @@ class EventDetails extends React.Component {
 
   render() {
 
-    const { paginationMap } = this.props
+    const { paginationMap, locale } = this.props
     const { activePageIndex } = this.state
     const page = paginationMap[activePageIndex]
+
+    const refreshButton = this.props.handleRefresh ? (
+      <div style={{marginRight: 15, float: 'right', cursor: 'pointer'}}><FaFresh style={{transform: 'scale(1.5)'}} onClick={this.props.handleRefresh}/></div>
+    ) : null
 
     if (page && page.length && paginationMap) {
 
       return (
-
         <div>
+          { refreshButton}
           <div className="page-link-parent">
-            <span>Side: </span>
+            <span>{translations[locale].page}</span>
             {paginationMap.map ( (page, index) => {
               const isActive = (index == activePageIndex) ? 'page-link active-link' : 'page-link inactive-link'
               return <span className={isActive} onClick={(e) => this.handlePageClick(e, index)} key={"link-" + index}>{index+1}</span>
@@ -59,9 +59,8 @@ class EventDetails extends React.Component {
               })
 
               return (
-
-                <div className="jobstatus-wrapper" key={"jobstatus-wrapper-" + listItem.chouetteJobId + '-' + index}>
-                  <EventStepper key={"event-group-" + listItem.chouetteJobId + '-' + index} groups={eventGroup} listItem={listItem}/>
+                <div style={{marginBottom: 20, border: '1px solid #eee', padding: 10}} key={"jobstatus-" + listItem.chouetteJobId + '-' + index}>
+                  <EventStepper locale={locale} key={"event-group-" + listItem.chouetteJobId + '-' + index} groups={eventGroup} listItem={listItem}/>
                 </div>
               )
             }) }
@@ -71,12 +70,11 @@ class EventDetails extends React.Component {
 
     } else {
       return (
-        <div className="jobstatus-wrapper">
-          <div style={{fontWeight: 600}}>No status</div>
+        <div style={{marginBottom: 20, border: '1px solid #eee', padding: 10}}>
+          <div style={{fontWeight: 600}}>{translations[locale].no_status}</div>
         </div>
       )
     }
-
   }
 }
 

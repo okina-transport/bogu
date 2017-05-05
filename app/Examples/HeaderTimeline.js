@@ -1,8 +1,7 @@
 import React from 'react'
-import { HeaderTimeline, Timeline} from '../components/'
-import { formatLineStats, sortLines } from '../utils'
+import { HeaderTimeline, Timeline} from '../../src/components/'
+import { formatLineStats, sortLines } from '../../utils'
 import lineStatsNorland from '../../tests/mock/lineStatsNorland'
-
 
 const HeaderTimelineExample = props => {
 

@@ -41,6 +41,8 @@ if(TARGET === 'build') {
     externals: [{
       react: 'react',
       moment: 'moment',
+      'material-ui': 'material-ui',
+      'react-icons': 'react-icons',
     }],
     output: {
       filename: '[name].js',
