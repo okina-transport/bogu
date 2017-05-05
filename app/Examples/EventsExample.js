@@ -1,5 +1,5 @@
 import React from 'react'
-import paginationMap from '../../tests/mock/paginationMap'
+import dataSource from '../../tests/mock/eventsDatasource'
 import EventDetails from '../../src/components/EventDetails'
 
 const EventsExample = props => {
@@ -9,7 +9,7 @@ const EventsExample = props => {
   return (
     <div style={{overflowY: 'scroll', overflowX: 'hidden', margin: 'auto', width: '100%'}}>
       <h1>Events</h1>
-      <EventDetails paginationMap={paginationMap} locale="nb"/>
+      <EventDetails includeLevel2={true} handleRefresh={() => {}} dataSource={dataSource} locale="nb"/>
     </div>
   )
 }

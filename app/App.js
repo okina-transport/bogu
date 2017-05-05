@@ -7,7 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeExampleIndex: 0
+      activeExampleIndex: 1
     }
   }
 

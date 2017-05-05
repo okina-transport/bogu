@@ -99,7 +99,7 @@ class EventStepper extends React.Component {
     formattedGroups[name] = combined
   }
 
-  bullet(formattedGroups, groups, locale) {
+  bullet(formattedGroups, groups, locale, includeLevel2) {
     const columnStyle = {
       display: 'flex',
       flexDirection: 'column',
@@ -112,17 +112,17 @@ class EventStepper extends React.Component {
         let event = formattedGroups[group]
         if (event instanceof Array) {
           column = Object.keys(event).map((key, i) => {
-            return this.renderEvent(event[key], event, key, i, false, i, locale)
+            return this.renderEvent(event[key], event, key, i, false, i, locale, includeLevel2)
           })
         } else {
-          column = this.renderEvent(event, groups, group, index, index === 0, 0, locale)
+          column = this.renderEvent(event, groups, group, index, index === 0, 0, locale, includeLevel2)
         }
-        return <div style={columnStyle}>{column}</div>
+        return <div key={'bullet-' +index} style={columnStyle}>{column}</div>
       }
     )
   }
 
-  renderEvent(event, groups, group, index, isFirst, columnIndex = 0, locale) {
+  renderEvent(event, groups, group, index, isFirst, columnIndex = 0, locale, includeLevel2) {
     const groupStyle = {
       display: "flex",
       flexDirection: "row",
@@ -161,7 +161,7 @@ class EventStepper extends React.Component {
           { this.getIconByState(event.endState) }
         </div>
         <div style={{...groupText, opacity: event.missingBeforeStartStart ? 0.2 : 1}}>
-          <ControlledChouetteLink events={event}> { ActionTranslations[locale].text[group] } </ControlledChouetteLink>
+          <ControlledChouetteLink includeLevel2={includeLevel2} events={event}> { ActionTranslations[locale].text[group] } </ControlledChouetteLink>
         </div>
       </div>
     )
@@ -178,12 +178,12 @@ class EventStepper extends React.Component {
       marginTop: 10
     }
 
-    const { groups, listItem, locale } = this.props
+    const { groups, listItem, locale, includeLevel2 } = this.props
     const { expanded } = this.state
 
     const formattedGroups = this.addUnlistedStates(groups)
     this.combine(formattedGroups, ['EXPORT', 'EXPORT_NETEX'], 'EXPORT')
-    const bullets = this.bullet(formattedGroups, groups, locale)
+    const bullets = this.bullet(formattedGroups, groups, locale, includeLevel2)
 
     return (
       <div key={"event" + listItem.chouetteJobId} style={{margin: 'auto', width: '98%', cursor: 'pointer'}} onClick={() => this.handleToggleVisibility()}>
@@ -196,7 +196,7 @@ class EventStepper extends React.Component {
           <div style={{fontSize: '0.9em', fontWeight: 600, flex: 2}}>{listItem.fileName || ActionTranslations[locale].filename.undefined}</div>
         </div>
         <div style={stepperstyle}>
-          {bullets}
+          { bullets }
           <div style={{marginLeft: 'auto', marginRight: 20, marginTop: -50}} onClick={() => this.handleToggleVisibility()}>
             { !expanded ? <FaChevronDown/> : <FaChevronUp/> }
           </div>

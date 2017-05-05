@@ -2,7 +2,7 @@ import React from 'react'
 
 const ChouetteLink = ({ action, id, referential, children }) => {
 
-  const baseURL = `${window.config.chouetteBaseUrl}/referentials/`
+  const baseURL = `${window.config.chouetteBaseUrl}referentials/`
 
   const actionMap = {
     "importer": `imports/${id}/compliance_check`,
