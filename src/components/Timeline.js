@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react'
 import { color, dimension } from '../styles'
 
@@ -67,6 +68,7 @@ class Timeline extends React.Component {
         width: '1px',
         height: '100%',
         position: 'absolute',
+        marginLeft: 0,
       }
 
       hrStyle.marginLeft = (33 + validDaysOffset) + '%'

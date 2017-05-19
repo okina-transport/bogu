@@ -10,6 +10,7 @@
   "scripts": {
     "build": "BABEL_ENV=production webpack --progress --colors --display-error-details",
     "dev": "webpack-dev-server",
+    "flow": "flow",
     "test": "jest tests"
   },
   "author": "Morten Friesgaard",
@@ -23,15 +24,18 @@
     "moment": "^2.17.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-react-transform": "^2.0.2",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-es2015": "^6.22.0",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-0": "^6.22.0",
     "css-loader": "^0.28.0",
     "expect": "^1.20.2",
+    "flow-bin": "^0.46.0",
     "jest": "^20.0.3",
     "jsdom": "^9.9.1",
     "jsdom-global": "^2.1.1",

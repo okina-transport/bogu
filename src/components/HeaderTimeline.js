@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react'
 import { color, dimension } from '../styles'
 
@@ -13,11 +14,8 @@ class HeaderTimeline extends React.Component {
     effectivePeriods: PropTypes.array.isRequired,
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      showTooltip: false
-    }
+  state = {
+    showTooltip: false
   }
 
   handleToggleToolTip() {
