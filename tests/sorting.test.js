@@ -59,7 +59,6 @@ describe('should be able to sort lines', () => {
 
     it('valid first', () => {
         const sorted = sortLines(4, data, 'all')
-        console.log(sorted)
         expect(sorted[0]).toBe('next')
     })
 })
