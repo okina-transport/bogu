@@ -92,14 +92,14 @@ export const segmentName = (segment, numDays, locale) => {
   return segmentMap(locale)['dynamic'].replace('DAYS', numDays)
 }
 
-export const segmentName2Key = (segmentName, locale) => {
-  if (!text2key(locale).hasOwnProperty(segmentName)) {
+export const segmentName2Key = (segmentName) => {
+  if (!text2key.hasOwnProperty(segmentName)) {
     let idxStart = segmentName.indexOf('< ') + 2
     let idxEnd = segmentName.indexOf(' da')
 
     return {segment: 'dynamic', daysValid: parseInt(segmentName.substring(idxStart, idxEnd))}
   }
-  return {segment: text2key(locale)[segmentName], daysValid: 0}
+  return {segment: text2key[segmentName], daysValid: 0}
 }
 
 const segmentMap = (locale) => {
@@ -124,24 +124,15 @@ const segmentMap = (locale) => {
   }
 }
 
-const text2key = (locale) => {
-  switch (locale) {
-    case 'nb':
-      return {
-        'Alle linjer' : 'all',
-        'Gyldige linjer' : 'valid',
-        'Utgående linjer' : 'expiring',
-        'Utgåtte linjer' : 'invalid',
-      }
-    default:
-    case 'en':
-      return {
-        'All lines' : 'all',
-        'Valid lines' : 'valid',
-        'Expiring lines' : 'expiring',
-        'Invalid lines' : 'invalid',
-      }
-  }
+const text2key = {
+    'Alle linjer' : 'all',
+    'Gyldige linjer' : 'valid',
+    'Utgående linjer' : 'expiring',
+    'Utgåtte linjer' : 'invalid',
+    'All lines' : 'all',
+    'Valid lines' : 'valid',
+    'Expiring lines' : 'expiring',
+    'Invalid lines' : 'invalid',
 }
 
 const validPeriod = (endDate, from, to) => (moment(endDate).add(1, 'days').isBetween(from, to, 'days', '[]')) ? to : endDate
