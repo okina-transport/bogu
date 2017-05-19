@@ -1,11 +1,20 @@
-import expect from 'expect'
 import { sortLines, sortIcon } from '../src/utils'
 
 
 describe('sorting icon', () => {
     it('should return different sorting icons', () => {
-        let icon1 = sortIcon(0);
-        expect(JSON.stringify(icon1)).toBe(JSON.stringify(icon1)) // TODO Jest
+        let icon0 = sortIcon(0)
+        let icon1 = sortIcon(1)
+        let icon2 = sortIcon(2)
+        let icon3 = sortIcon(3)
+        let icon4 = sortIcon(4)
+
+        expect(icon0).toEqual(sortIcon(0))
+        expect(icon1).not.toEqual(icon2)
+        expect(icon1).not.toEqual(icon3)
+        expect(icon1).not.toEqual(icon4)
+        expect(icon2).not.toEqual(icon3)
+        expect(icon3).not.toEqual(icon4)
     })
 })
 

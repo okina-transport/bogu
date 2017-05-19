@@ -1,4 +1,3 @@
-import expect from 'expect'
 import { segmentName, segmentName2Key, validity } from '../src/utils'
 
 

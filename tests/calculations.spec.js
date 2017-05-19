@@ -1,5 +1,4 @@
 /* tests on calculation logic for timeline items */
-import expect from 'expect'
 import {formatLineStats} from '../src/utils'
 import lineStats from './mock/lineStats'
 import lineStatsNorland from './mock/lineStatsNorland'
@@ -19,8 +18,8 @@ describe('Test calculations for effectivePeriods on timeline', () => {
     let timelineStartPosition = formattedLineStats.linesMap[lineNumber].effectivePeriods[0].timelineStartPosition
     let timelineEndPosition = formattedLineStats.linesMap[lineNumber].effectivePeriods[0].timelineEndPosition
 
-    expect(timelineStartPosition >= 0).toBe(true)
-    expect(timelineEndPosition <= 100).toBe(true)
+    expect(timelineStartPosition).toBeGreaterThanOrEqual(0)
+    expect(timelineEndPosition).toBeLessThanOrEqual(100)
 
   })
 
@@ -39,8 +38,8 @@ describe('Test calculations for effectivePeriods on timeline', () => {
     let timelineStartPosition = formattedLineStats.linesMap[lineNumber].effectivePeriods[0].timelineStartPosition
     let timelineEndPosition = formattedLineStats.linesMap[lineNumber].effectivePeriods[0].timelineEndPosition
 
-    expect(timelineStartPosition == 50).toBe(true)
-    expect(timelineEndPosition == 100).toBe(true)
+    expect(timelineStartPosition).toBe(50)
+    expect(timelineEndPosition).toBe(100)
 
   })
 
@@ -59,8 +58,8 @@ describe('Test calculations for effectivePeriods on timeline', () => {
     let timelineStartPosition = formattedLineStats.linesMap[lineNumber].effectivePeriods[0].timelineStartPosition
     let timelineEndPosition = formattedLineStats.linesMap[lineNumber].effectivePeriods[0].timelineEndPosition
 
-    expect(timelineStartPosition == 0).toBe(true)
-    expect(timelineEndPosition == 15).toBe(true)
+    expect(timelineStartPosition).toBe(0)
+    expect(timelineEndPosition).toBe(15)
 
   })
 
@@ -84,9 +83,10 @@ describe('Test calculations for timeschedules on timeline', () => {
     let timelineStartPosition = formattedLineStats.linesMap[lineNumber].lines[0].timetables[0].periods[0].timelineStartPosition
     let timelineEndPosition = formattedLineStats.linesMap[lineNumber].lines[0].timetables[0].periods[0].timelineEndPosition
 
-    expect(timelineStartPosition >= 0 && timelineStartPosition <= 100).toBe(true)
-    expect(timelineEndPosition <= 100 && timelineEndPosition >= 0).toBe(true)
-
+    expect(timelineStartPosition).toBeGreaterThanOrEqual(0)
+    expect(timelineStartPosition).toBeLessThanOrEqual(100)
+    expect(timelineEndPosition).toBeGreaterThanOrEqual(0)
+    expect(timelineEndPosition).toBeLessThanOrEqual(100)
   })
 
   it('Effective period should start from the middle of the timeline if effective period starts at total amount of days /2', () => {
@@ -106,8 +106,8 @@ describe('Test calculations for timeschedules on timeline', () => {
     let timelineStartPosition = formattedLineStats.linesMap[lineNumber].lines[0].timetables[0].periods[0].timelineStartPosition
     let timelineEndPosition = formattedLineStats.linesMap[lineNumber].lines[0].timetables[0].periods[0].timelineEndPosition
 
-    expect(timelineStartPosition == 0).toBe(true)
-    expect(timelineEndPosition == 15).toBe(true)
+    expect(timelineStartPosition).toBe(0)
+    expect(timelineEndPosition).toBe(15)
 
   })
 })
@@ -120,7 +120,7 @@ describe('Days valid calculation', () => {
     let formattedLines = formatLineStats(list)
 
     expect(formattedLines.minDays.days).toBe(0)
-    expect(formattedLines.minDays.validity).toBe('INVALID')
+    expect(formattedLines.minDays.validity).toBe('EXPIRING')
 
     let validity = { 0: 256, 14: 0, 30: 0, 60: 0, 120: 0, 127: 0}
     validity[-1] = 0
