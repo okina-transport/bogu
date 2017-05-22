@@ -1,4 +1,4 @@
-import { sortLines, sortIcon } from '../src/utils'
+import { sortLines, sortIcon, filterLines } from '../src/utils'
 
 
 describe('sorting icon', () => {
@@ -30,6 +30,26 @@ const data = {
       'a123',
       '_dsd',
       ' dsd',
+    ]
+  },
+  invalid: {
+    lineNumbers: [
+      'beta',
+      'a123',
+      '_dsd'
+    ]
+  },
+  valid: {
+    lineNumbers: [
+      'zzzz',
+      'next'
+    ]
+  },
+  expiring: {
+    lineNumbers: [
+      'hest',
+      'alpha',
+      '12345',
     ]
   },
   daysValid: [
@@ -120,4 +140,59 @@ describe('should be able to sort lines', () => {
       'a123',
     ])
   })
+
+  it('multi sort - unorded', () => {
+    let sorted = sortLines(0, data, 'all')
+    sorted = sortLines(1, data, 'all')
+    sorted = sortLines(2, data, 'all')
+    sorted = sortLines(3, data, 'all')
+    sorted = sortLines(4, data, 'all')
+    sorted = sortLines(0, data, 'all')
+
+    expect(sorted).toEqual([
+      'hest',
+      'next',
+      'alpha',
+      '12345',
+      'beta',
+      'zzzz',
+      'a123',
+      '_dsd',
+      ' dsd',
+    ])
+  })
+
+  it('multi sort - sorted', () => {
+    let sorted1a = sortLines(1, data, 'all')
+    let sorted2 = sortLines(2, data, 'all')
+    let sorted1b = sortLines(1, data, 'all')
+
+
+    let sorted1expected = [' dsd', '12345', '_dsd', 'a123', 'alpha', 'beta', 'hest', 'next', 'zzzz'];
+    expect(sorted1a).toEqual(sorted1expected)
+    expect(sorted1b).toEqual(sorted1expected)
+    expect(sorted1a).not.toBe(sorted1b)
+    expect(sorted1a).toEqual(sorted1b)
+
+    expect(sorted2).toEqual([
+      'zzzz',
+      'next',
+      'hest',
+      'beta',
+      'alpha',
+      'a123',
+      '_dsd',
+      '12345',
+      ' dsd',
+    ])
+  })
+})
+
+
+describe('filter liens', () => {
+  it('should return all', () => {
+    expect(filterLines(data, 'all')).toEqual(['hest', 'next', 'alpha', '12345', 'beta', 'zzzz', 'a123', '_dsd', ' dsd'])
+    expect(filterLines(data, 'invalid')).toEqual(['beta', 'a123', '_dsd'])
+    expect(filterLines(data, 'valid')).toEqual(['zzzz', 'next'])
+    expect(filterLines(data, 'expiring')).toEqual(['hest', 'alpha', '12345',]) })
 })
