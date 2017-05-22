@@ -37,9 +37,9 @@ export const sortLines = (sorting, lineData, selectedSegment, daysValid) => {
     default:
       return order
     case 1:
-      return order.sort()
+      return [...order].sort()
     case 2:
-      return order.sort().reverse()
+      return [...order].sort().reverse()
     case 3:
       let daysAsc = lineData.daysValid.slice().sort( sortMethod('days', true) )
       return daysAsc.filter( (line) => order.indexOf(line.lineNumber) !== -1).map((line) => line.lineNumber)
