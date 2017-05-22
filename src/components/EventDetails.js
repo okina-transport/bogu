@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react'
 import EventStepper from './EventStepper'
 require('./EventDetails.css')
@@ -6,16 +7,13 @@ import translations from './translations'
 
 class EventDetails extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      activePageIndex: 0,
-      endStateFilter: "ALL",
-    }
+  state = {
+    activePageIndex: 0,
+    endStateFilter: "ALL",
   }
 
-  handlePageClick (e, pageIndex) {
-    e.preventDefault()
+  handlePageClick (event: Event, pageIndex: number) {
+    event.preventDefault()
     this.setState({
       activePageIndex: pageIndex
     })
