@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react'
 import ActionTranslations from './actionTranslations'
 import FaChevronDown from 'react-icons/lib/fa/chevron-down'
@@ -13,11 +14,8 @@ import translations from './translations'
 
 class EventStepper extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      expanded: false
-    }
+  state = {
+    expanded: false
   }
 
   static propTypes = {
@@ -25,7 +23,7 @@ class EventStepper extends React.Component {
     listItem: PropTypes.object.isRequired
   }
 
-  getIconByState(state) {
+  getIconByState(state: String) {
     switch (state) {
       case "OK": return <MdDone style={{color: 'green', width: 24, height: 22, marginTop: -2}}/>
       case "PENDING": return <MdHour style={{color: 'orange', width: 24, height: 22, marginTop: -2}}/>
@@ -51,7 +49,7 @@ class EventStepper extends React.Component {
     ]
   }
 
-  addUnlistedStates(groups) {
+  addUnlistedStates(groups: Object) {
 
     const states = this.eventStates()
 
@@ -80,15 +78,15 @@ class EventStepper extends React.Component {
     return finalGroups
   }
 
-  handleToggleVisibility (id) {
+  handleToggleVisibility () {
     this.setState({
       expanded: !this.state.expanded
     })
   }
 
-  combine(formattedGroups, groups, name) {
-    const combined = []
-    for (let i in groups) {
+  combine(formattedGroups: Object, groups: Array<string>, name: string) {
+    const combined = {}
+    for (let i = 0; i < groups.length; i++) {
       const group = groups[i]
       combined[group] = formattedGroups[group]
 
@@ -99,7 +97,7 @@ class EventStepper extends React.Component {
     formattedGroups[name] = combined
   }
 
-  bullet(formattedGroups, groups, locale, includeLevel2) {
+  bullet(formattedGroups: Object, groups: Object, locale: string, includeLevel2: bool) {
     const columnStyle = {
       display: 'flex',
       flexDirection: 'column',
@@ -122,7 +120,7 @@ class EventStepper extends React.Component {
     )
   }
 
-  renderEvent(event, groups, group, index, isFirst, columnIndex = 0, locale, includeLevel2) {
+  renderEvent(event: Object, groups: Object, group: string, index: number, isFirst: bool, columnIndex: number = 0, locale: string, includeLevel2: bool) {
     const groupStyle = {
       display: "flex",
       flexDirection: "row",
