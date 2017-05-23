@@ -1,6 +1,8 @@
+// @flow
 import React from 'react'
 
-const ChouetteLink = ({ action, id, referential, children }) => {
+const ChouetteLink = ({action, id, referential, children}:
+                      { action: string, id: string, referential: string, children?: any }) => {
 
   const baseURL = `${window.config.chouetteBaseUrl}referentials/`
 
