@@ -1,3 +1,4 @@
+// @flow
 import React from 'react'
 import ChouetteLink from './ChouetteLink'
 
@@ -9,10 +10,9 @@ class ControlledChouetteLink extends React.Component {
 
     let supportedActions = ['IMPORT', 'VALIDATION_LEVEL_1']
 
-    let choueteActionMap = {
-      'IMPORT': 'importer',
-      'VALIDATION_LEVEL_1': 'validator',
-    }
+    let choueteActionMap: { [string] : string } = {}
+    choueteActionMap['IMPORT'] = 'importer'
+    choueteActionMap['VALIDATION_LEVEL_1'] = 'validator'
 
     if (includeLevel2) {
       supportedActions.push('VALIDATION_LEVEL_2')
