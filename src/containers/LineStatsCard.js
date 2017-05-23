@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react'
 import { Card, CardText } from 'material-ui/Card'
 import { List, ListItem } from 'material-ui/List'
@@ -20,24 +21,21 @@ class LineStatsCard extends React.Component {
     handleClose: PropTypes.func
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      sorting: 0
-    }
+  state = {
+    sorting: 0
   }
 
-  handleToggleListItem(line) {
+  handleToggleListItem(line: string) {
     let isOpen = !this.state['open'+line]
     this.saveNestedState(isOpen, line)
   }
 
-  handleToggle(item, line) {
+  handleToggle(item: Object, line: string) {
     let isOpen = !this.state['open'+line] || item.state.open
     this.saveNestedState(isOpen, line)
   }
 
-  saveNestedState(isOpen, line) {
+  saveNestedState(isOpen: bool, line: string) {
     let state = this.state
     state['open'+line] = isOpen
     this.setState(state)
@@ -49,8 +47,8 @@ class LineStatsCard extends React.Component {
     this.setState({sorting: sort})
   }
 
-  sortMethod( index = 0, ascending = true) {
-    return function (a, b) {
+  sortMethod( index: any = 0, ascending: bool = true) {
+    return function (a: Object, b: Object) {
       if (a[index] === b[index]) {
         return 0
       } else if (a[index] <  b[index]) {
@@ -61,7 +59,7 @@ class LineStatsCard extends React.Component {
     }
   }
 
-  sortLines(stats, selectedSegment, daysValid) {
+  sortLines(stats: Object, selectedSegment: string, daysValid: number) {
     let order = filterLines(stats.data, selectedSegment, daysValid)
 
     switch (this.state.sorting) {
