@@ -110,8 +110,11 @@ class EventDetails extends React.Component {
 
 const getPaginationMap = (statusList = []) => {
   let paginationMap = []
-  for (let i = 0, j = statusList.length; i < j; i+=10) {
-    paginationMap.push(statusList.slice(i,i+10))
+
+  if (statusList && statusList.length) {
+    for (let i = 0, j = statusList.length; i < j; i+=10) {
+      paginationMap.push(statusList.slice(i,i+10))
+    }
   }
   return paginationMap
 }
