@@ -1,6 +1,6 @@
 {
   "name": "bogu",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Conjuntion of code in bel and ninkasi",
   "main": "index.js",
   "keywords": [
@@ -16,7 +16,7 @@
   "license": "MIT",
   "peerDependencies": {
     "material-ui": "^0.18.0",
-    "react": "^15.4.2",
+    "react": "^15.6.1",
     "react-icons": "^2.2.3"
   },
   "dependencies": {
@@ -36,8 +36,8 @@
     "jsdom": "^9.9.1",
     "jsdom-global": "^2.1.1",
     "mocha": "^3.2.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "style-loader": "^0.16.1",
     "webpack": "^2.2.1",
