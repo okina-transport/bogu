@@ -28,7 +28,7 @@ class EventDetails extends React.Component {
     let filteredPages = null;
 
     if (endStateFilter === 'FAILED' || endStateFilter === 'OK') {
-      filteredPages = dataSource.filter(
+      filteredPages = (dataSource||[]).filter(
         event => event.endState === endStateFilter
       );
     }
@@ -144,11 +144,14 @@ class EventDetails extends React.Component {
               marginBottom: 20,
               marginTop: 20,
               border: '1px solid #eee',
-              padding: 10
+              padding: 40
             }}
           >
             <div style={{ fontWeight: 600 }}>
               {translations[locale].no_status}
+            </div>
+            <div style={{marginLeft: 10}}>
+              {refreshButton}
             </div>
           </div>
         </div>
