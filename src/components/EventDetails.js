@@ -138,6 +138,9 @@ class EventDetails extends React.Component {
           >
             <option value="ALL">{translations[locale].show_all}</option>
             <option value="OK">{translations[locale].show_only_success}</option>
+            <option value="CANCELLED">
+              {translations[locale].show_only_cancelled}
+            </option>
             <option value="FAILED">
               {translations[locale].show_only_failed}
             </option>
