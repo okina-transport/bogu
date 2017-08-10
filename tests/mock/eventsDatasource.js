@@ -23,7 +23,7 @@ export default [
         "referential": null
       },
       {
-        "state": "CANCELLED",
+        "state": "FAILED",
         "date": "2017-04-27 14:35:46",
         "action": "IMPORT",
         "chouetteJobId": null,
@@ -34,7 +34,7 @@ export default [
     "firstEvent": "2017-04-27 14:35:45",
     "lastEvent": "2017-04-27 15:14:51",
     "durationMillis": 2345641,
-    "endState": "CANCELLED",
+    "endState": "FAILED",
     "fileName": "2599_36_170424_170625_v6.zip",
     "duration": "00:39:05",
     "started": "8 dager siden"

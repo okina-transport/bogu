@@ -21,55 +21,59 @@ class EventDetails extends React.Component {
   }
 
   render() {
-
     const { dataSource, locale, includeLevel2 } = this.props;
     const { activePageIndex, endStateFilter } = this.state;
 
     let filteredPages = null;
 
-    if (endStateFilter === 'FAILED' || endStateFilter === 'OK' || endStateFilter === 'CANCELLED') {
-      filteredPages = (dataSource||[]).filter(
-        event => event.endState === endStateFilter
-      );
+    if (
+      endStateFilter === 'FAILED' ||
+      endStateFilter === 'OK' ||
+      endStateFilter === 'CANCELLED'
+    ) {
+      filteredPages = (dataSource || [])
+        .filter(event => event.endState === endStateFilter);
     }
 
     let paginationMap = getPaginationMap(filteredPages || dataSource);
 
+    const filterSelect = (
+      <select
+        value={endStateFilter}
+        onChange={e => {
+          this.setState({
+            endStateFilter: e.target.value,
+            activePageIndex: 0
+          });
+        }}
+      >
+        <option value="ALL">{translations[locale].show_all}</option>
+        <option value="OK">{translations[locale].show_only_success}</option>
+        <option value="CANCELLED">
+          {translations[locale].show_only_cancelled}
+        </option>
+        <option value="FAILED">
+          {translations[locale].show_only_failed}
+        </option>
+      </select>
+    );
+
     const page = paginationMap[activePageIndex];
 
-    const refreshButton = this.props.handleRefresh
-      ? <div style={{ marginRight: 15, float: 'right', cursor: 'pointer' }}>
-          <FaFresh
-            style={{ transform: 'scale(1.5)' }}
-            onClick={this.props.handleRefresh}
-          />
-        </div>
-      : null;
+    const refreshButton =
+      this.props.handleRefresh &&
+      <div style={{ marginRight: 15, float: 'right', cursor: 'pointer' }}>
+        <FaFresh
+          style={{ transform: 'scale(1.5)' }}
+          onClick={this.props.handleRefresh}
+        />
+      </div>;
 
     if (page && page.length && paginationMap) {
       return (
         <div>
           <div style={{ width: '100%', textAlign: 'left', marginBottom: 5 }}>
-            <select
-              value={endStateFilter}
-              onChange={e => {
-                this.setState({
-                  endStateFilter: e.target.value,
-                  activePageIndex: 0
-                });
-              }}
-            >
-              <option value="ALL">{translations[locale].show_all}</option>
-              <option value="OK">
-                {translations[locale].show_only_success}
-              </option>
-              <option value="CANCELLED">
-                {translations[locale].show_only_cancelled}
-              </option>
-              <option value="FAILED">
-                {translations[locale].show_only_failed}
-              </option>
-            </select>
+            {filterSelect}
           </div>
           {refreshButton}
           <div className="page-link-parent">
@@ -127,24 +131,7 @@ class EventDetails extends React.Component {
     } else {
       return (
         <div style={{ width: '100%', textAlign: 'left', marginBottom: 5 }}>
-          <select
-            value={endStateFilter}
-            onChange={e => {
-              this.setState({
-                endStateFilter: e.target.value,
-                activePageIndex: 0
-              });
-            }}
-          >
-            <option value="ALL">{translations[locale].show_all}</option>
-            <option value="OK">{translations[locale].show_only_success}</option>
-            <option value="CANCELLED">
-              {translations[locale].show_only_cancelled}
-            </option>
-            <option value="FAILED">
-              {translations[locale].show_only_failed}
-            </option>
-          </select>
+          {filterSelect}
           <div
             style={{
               marginBottom: 20,
@@ -156,7 +143,7 @@ class EventDetails extends React.Component {
             <div style={{ fontWeight: 600 }}>
               {translations[locale].no_status}
             </div>
-            <div style={{marginLeft: 10}}>
+            <div style={{ marginLeft: 10 }}>
               {refreshButton}
             </div>
           </div>
