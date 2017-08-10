@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import EventStepper from './EventStepper';
-require('./EventDetails.css');
+import './EventDetails.css';
 const FaFresh = require('react-icons/lib/fa/refresh');
 import translations from './translations';
 
@@ -27,7 +27,7 @@ class EventDetails extends React.Component {
 
     let filteredPages = null;
 
-    if (endStateFilter === 'FAILED' || endStateFilter === 'OK') {
+    if (endStateFilter === 'FAILED' || endStateFilter === 'OK' || endStateFilter === 'CANCELLED') {
       filteredPages = (dataSource||[]).filter(
         event => event.endState === endStateFilter
       );
@@ -62,6 +62,9 @@ class EventDetails extends React.Component {
               <option value="ALL">{translations[locale].show_all}</option>
               <option value="OK">
                 {translations[locale].show_only_success}
+              </option>
+              <option value="CANCELLED">
+                {translations[locale].show_only_cancelled}
               </option>
               <option value="FAILED">
                 {translations[locale].show_only_failed}

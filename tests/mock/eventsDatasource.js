@@ -23,137 +23,18 @@ export default [
         "referential": null
       },
       {
-        "state": "PENDING",
+        "state": "CANCELLED",
         "date": "2017-04-27 14:35:46",
         "action": "IMPORT",
         "chouetteJobId": null,
         "referential": null
       },
-      {
-        "state": "OK",
-        "date": "2017-04-27 14:41:49",
-        "action": "IMPORT",
-        "chouetteJobId": 14869,
-        "referential": "rut"
-      },
-      {
-        "state": "PENDING",
-        "date": "2017-04-27 14:41:49",
-        "action": "VALIDATION_LEVEL_1",
-        "chouetteJobId": null,
-        "referential": "rut"
-      },
-      {
-        "state": "OK",
-        "date": "2017-04-27 14:44:52",
-        "action": "VALIDATION_LEVEL_1",
-        "chouetteJobId": 14872,
-        "referential": "rut"
-      },
-      {
-        "state": "PENDING",
-        "date": "2017-04-27 14:44:52",
-        "action": "DATASPACE_TRANSFER",
-        "chouetteJobId": null,
-        "referential": "rut"
-      },
-      {
-        "state": "OK",
-        "date": "2017-04-27 14:57:00",
-        "action": "DATASPACE_TRANSFER",
-        "chouetteJobId": 14874,
-        "referential": "rut"
-      },
-      {
-        "state": "PENDING",
-        "date": "2017-04-27 14:57:00",
-        "action": "VALIDATION_LEVEL_2",
-        "chouetteJobId": null,
-        "referential": "rut"
-      },
-      {
-        "state": "STARTED",
-        "date": "2017-04-27 14:57:00",
-        "action": "VALIDATION_LEVEL_2",
-        "chouetteJobId": 14879,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "OK",
-        "date": "2017-04-27 14:59:01",
-        "action": "VALIDATION_LEVEL_2",
-        "chouetteJobId": 14879,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "PENDING",
-        "date": "2017-04-27 14:59:01",
-        "action": "EXPORT",
-        "chouetteJobId": null,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "STARTED",
-        "date": "2017-04-27 14:59:01",
-        "action": "EXPORT",
-        "chouetteJobId": 14880,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "OK",
-        "date": "2017-04-27 15:02:08",
-        "action": "EXPORT",
-        "chouetteJobId": 14880,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "PENDING",
-        "date": "2017-04-27 15:02:08",
-        "action": "BUILD_GRAPH",
-        "chouetteJobId": null,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "PENDING",
-        "date": "2017-04-27 15:02:08",
-        "action": "EXPORT_NETEX",
-        "chouetteJobId": null,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "STARTED",
-        "date": "2017-04-27 15:02:08",
-        "action": "EXPORT_NETEX",
-        "chouetteJobId": 14881,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "STARTED",
-        "date": "2017-04-27 15:02:09",
-        "action": "BUILD_GRAPH",
-        "chouetteJobId": null,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "FAILED",
-        "date": "2017-04-27 15:05:10",
-        "action": "EXPORT_NETEX",
-        "chouetteJobId": 14881,
-        "referential": "rb_rut"
-      },
-      {
-        "state": "OK",
-        "date": "2017-04-27 15:14:51",
-        "action": "BUILD_GRAPH",
-        "chouetteJobId": null,
-        "referential": "rb_rut"
-      }
     ],
     "correlationId": "53521016-921f-4509-acb7-4c8b6412588a",
     "firstEvent": "2017-04-27 14:35:45",
     "lastEvent": "2017-04-27 15:14:51",
     "durationMillis": 2345641,
-    "endState": "OK",
+    "endState": "CANCELLED",
     "fileName": "2599_36_170424_170625_v6.zip",
     "duration": "00:39:05",
     "started": "8 dager siden"

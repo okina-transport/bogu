@@ -30,7 +30,8 @@ export default {
       STARTED: "Påbegynt",
       FAILED: "Feil",
       DUPLICATE: "Feil - duplikat datasett",
-      IGNORED: "Ikke gjennomført"
+      IGNORED: "Ikke gjennomført",
+      CANCELLED: "Kansellert",
     }
   },
   "en": {
@@ -64,7 +65,8 @@ export default {
       STARTED: "Started",
       FAILED: "Failed",
       DUPLICATE: "Failed - duplicate data set",
-      IGNORED: "Skipped"
+      IGNORED: "Skipped",
+      CANCELLED: "Cancelled",
     }
   }
 }
