@@ -76,6 +76,7 @@ class EventStepper extends React.Component {
     return [
       'FILE_TRANSFER',
       'FILE_CLASSIFICATION',
+      'FILE_DELIVERY',
       'IMPORT',
       'VALIDATION_LEVEL_1',
       'DATASPACE_TRANSFER',
@@ -120,7 +121,7 @@ class EventStepper extends React.Component {
     });
   }
 
-  combine(formattedGroups, groups, name) {
+  createCombinedSplit(formattedGroups, groups, name) {
     const combined = [];
     for (let i in groups) {
       const group = groups[i];
@@ -131,6 +132,29 @@ class EventStepper extends React.Component {
       }
     }
     formattedGroups[name] = combined;
+  }
+
+  aggreggateFileEvents(data) {
+    let groups = {...data};
+    let endState = null;
+    let errorOn = null;
+    Object.keys(groups).forEach( group => {
+      if (group === 'FILE_CLASSIFICATION' || group === 'FILE_TRANSFER') {
+        endState = groups[group].endState;
+        if (endState === 'FAILED') {
+          errorOn = group;
+        }
+        delete groups[group]
+      }
+    });
+
+    if (endState !== null) {
+      groups.FILE_DELIVERY = {
+        endState: endState,
+        errorOn: errorOn
+      }
+    }
+    return groups;
   }
 
   bullet(formattedGroups, groups, locale, includeLevel2) {
@@ -144,6 +168,7 @@ class EventStepper extends React.Component {
     return Object.keys(formattedGroups).map((group, index) => {
       let column;
       let event = formattedGroups[group];
+
       if (event instanceof Array) {
         column = Object.keys(event).map((key, i) => {
           return this.renderEvent(
@@ -204,14 +229,16 @@ class EventStepper extends React.Component {
       transform: columnIndex > 0 && 'translateY(-0.5em) rotate(25deg) '
     };
 
-    if (group === 'FILE_CLASSIFICATION') return null;
-
     if (!ActionTranslations[locale].states[event.endState]) return null;
 
     let toolTipText = ActionTranslations[locale].states[event.endState];
 
     if (event.states && event.states[groups[group].states.length - 1]) {
       toolTipText += ' ' + event.states[event.states.length - 1].date;
+    }
+
+    if (event.errorOn) {
+      toolTipText = ActionTranslations[locale].errorMessage[event.errorOn];
     }
 
     return (
@@ -230,8 +257,7 @@ class EventStepper extends React.Component {
           }}
         >
           <ControlledChouetteLink includeLevel2={includeLevel2} events={event}>
-            {' '}{ActionTranslations[locale].text[group]}
-            {' '}
+            {ActionTranslations[locale].text[group]}
           </ControlledChouetteLink>
         </div>
       </div>
@@ -251,8 +277,9 @@ class EventStepper extends React.Component {
     const { groups, listItem, locale, includeLevel2 } = this.props;
     const { expanded } = this.state;
 
-    const formattedGroups = this.addUnlistedStates(groups);
-    this.combine(formattedGroups, ['EXPORT', 'EXPORT_NETEX'], 'EXPORT');
+    let formattedGroups = this.addUnlistedStates(groups);
+    formattedGroups = this.aggreggateFileEvents(formattedGroups);
+    this.createCombinedSplit(formattedGroups, ['EXPORT', 'EXPORT_NETEX'], 'EXPORT');
     const bullets = this.bullet(formattedGroups, groups, locale, includeLevel2);
 
     return (

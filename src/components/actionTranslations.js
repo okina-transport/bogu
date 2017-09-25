@@ -2,6 +2,8 @@ export default {
   "nb": {
     text: {
       FILE_TRANSFER: "Filoverføring",
+      FILE_CLASSIFICATION: "Filklassifisering",
+      FILE_DELIVERY: 'Filleveranse',
       IMPORT: "Import",
       EXPORT: "GTFS Eksport",
       EXPORT_NETEX: "NeTEx Eksport",
@@ -32,11 +34,17 @@ export default {
       DUPLICATE: "Feil - duplikat datasett",
       IGNORED: "Ikke gjennomført",
       CANCELLED: "Kansellert",
+    },
+    errorMessage: {
+      FILE_TRANSFER: 'Filoverføring feilet',
+      FILE_CLASSIFICATION: 'Filklassifisering feilet',
     }
   },
   "en": {
     text: {
       FILE_TRANSFER: "File transfer",
+      FILE_CLASSIFICATION: "File classification",
+      FILE_DELIVERY: 'File delivery',
       IMPORT: "Import",
       EXPORT: "GTFS export",
       EXPORT_NETEX: "NeTEx export",
@@ -67,6 +75,10 @@ export default {
       DUPLICATE: "Failed - duplicate data set",
       IGNORED: "Skipped",
       CANCELLED: "Cancelled",
+    },
+    errorMessage: {
+      FILE_TRANSFER: 'Failed to transfer file',
+      FILE_CLASSIFICATION: 'Failed on file classification',
     }
   }
 }
