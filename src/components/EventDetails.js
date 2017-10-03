@@ -3,13 +3,16 @@ import EventStepper from './EventStepper';
 import './EventDetails.css';
 const FaFresh = require('react-icons/lib/fa/refresh');
 import translations from './translations';
+import FilterButtonTray from './FilterButtonTray';
+import { getLastValidDate } from './buttonConfig';
 
 class EventDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       activePageIndex: 0,
-      endStateFilter: 'ALL'
+      endStateFilter: 'ALL',
+      dateFilter: 'ALL_TIME'
     };
   }
 
@@ -20,42 +23,65 @@ class EventDetails extends React.Component {
     });
   }
 
+  handleFilterChange(dateFilter) {
+    this.setState({
+      dateFilter: dateFilter
+    });
+  }
+
   render() {
-    const { dataSource, locale, includeLevel2 } = this.props;
-    const { activePageIndex, endStateFilter } = this.state;
+    const { dataSource, locale, includeLevel2, showDateFilter } = this.props;
+    const { activePageIndex, endStateFilter, dateFilter } = this.state;
 
     let filteredPages = null;
+    const lastDate = getLastValidDate(dateFilter);
+
+    const filteredByDate = (dataSource || []).filter(event => {
+      if (!lastDate) return event;
+      return new Date(event.firstEvent) > lastDate;
+    });
 
     if (
       endStateFilter === 'FAILED' ||
       endStateFilter === 'OK' ||
       endStateFilter === 'CANCELLED'
     ) {
-      filteredPages = (dataSource || [])
+      filteredPages = (filteredByDate || [])
         .filter(event => event.endState === endStateFilter);
     }
 
-    let paginationMap = getPaginationMap(filteredPages || dataSource);
+    let paginationMap = getPaginationMap(filteredPages || filteredByDate);
 
-    const filterSelect = (
-      <select
-        value={endStateFilter}
-        onChange={e => {
-          this.setState({
-            endStateFilter: e.target.value,
-            activePageIndex: 0
-          });
-        }}
-      >
-        <option value="ALL">{translations[locale].show_all}</option>
-        <option value="OK">{translations[locale].show_only_success}</option>
-        <option value="CANCELLED">
-          {translations[locale].show_only_cancelled}
-        </option>
-        <option value="FAILED">
-          {translations[locale].show_only_failed}
-        </option>
-      </select>
+    const filters = (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <select
+          style={{ fontSize: '0.9em' }}
+          value={endStateFilter}
+          onChange={e => {
+            e.preventDefault();
+            this.setState({
+              endStateFilter: e.target.value,
+              activePageIndex: 0
+            });
+          }}
+        >
+          <option value="ALL">{translations[locale].show_all}</option>
+          <option value="OK">{translations[locale].show_only_success}</option>
+          <option value="CANCELLED">
+            {translations[locale].show_only_cancelled}
+          </option>
+          <option value="FAILED">
+            {translations[locale].show_only_failed}
+          </option>
+        </select>
+        {showDateFilter &&
+          <FilterButtonTray
+            locale={locale}
+            style={{ marginLeft: 20 }}
+            activeButtonId={this.state.dateFilter}
+            onChange={this.handleFilterChange.bind(this)}
+          />}
+      </div>
     );
 
     const page = paginationMap[activePageIndex];
@@ -73,7 +99,7 @@ class EventDetails extends React.Component {
       return (
         <div>
           <div style={{ width: '100%', textAlign: 'left', marginBottom: 5 }}>
-            {filterSelect}
+            {filters}
           </div>
           {refreshButton}
           <div className="page-link-parent">
@@ -131,7 +157,7 @@ class EventDetails extends React.Component {
     } else {
       return (
         <div style={{ width: '100%', textAlign: 'left', marginBottom: 5 }}>
-          {filterSelect}
+          {filters}
           <div
             style={{
               marginBottom: 20,

@@ -225,6 +225,7 @@ class EventStepper extends React.Component {
       borderTopStyle: 'solid',
       borderTopWidth: 1,
       width: 30,
+      borderRadius: 30,
       margin: 8,
       transform: columnIndex > 0 && 'translateY(-0.5em) rotate(25deg) '
     };

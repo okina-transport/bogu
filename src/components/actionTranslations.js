@@ -38,6 +38,12 @@ export default {
     errorMessage: {
       FILE_TRANSFER: 'Filoverføring feilet',
       FILE_CLASSIFICATION: 'Filklassifisering feilet',
+    },
+    filterButton: {
+      ALL_TIME: 'Ubegrenset',
+      LAST_24_HOURS: 'Siste døgn',
+      LAST_WEEK: 'Siste uke',
+      LAST_MONTH: 'Siste måned'
     }
   },
   "en": {
@@ -79,6 +85,12 @@ export default {
     errorMessage: {
       FILE_TRANSFER: 'Failed to transfer file',
       FILE_CLASSIFICATION: 'Failed on file classification',
+    },
+    filterButton: {
+      ALL_TIME: 'Unlimited',
+      LAST_24_HOURS: 'Last 24 hours',
+      LAST_WEEK: 'Last week',
+      LAST_MONTH: 'Last month'
     }
   }
 }
