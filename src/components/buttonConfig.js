@@ -2,6 +2,9 @@ const buttonConfig = {
   fields: [
     { id: 'ALL_TIME',
     },
+    {
+      id: 'LAST_12_HOURS'
+    },
     { id: 'LAST_24_HOURS',
     },
     {
@@ -23,6 +26,10 @@ export const getLastValidDate = id => {
     case 'LAST_WEEK': {
       let now = new Date();
       return new Date(now.setDate(now.getDate() - 7));
+    }
+    case 'LAST_12_HOURS': {
+     let now = new Date();
+     return new Date(now.setHours(now.getHours() - 12));
     }
     case 'LAST_24_HOURS': {
       let now = new Date();

@@ -41,6 +41,7 @@ export default {
     },
     filterButton: {
       ALL_TIME: 'Ubegrenset',
+      LAST_12_HOURS: 'Siste 12 timene',
       LAST_24_HOURS: 'Siste døgn',
       LAST_WEEK: 'Siste uke',
       LAST_MONTH: 'Siste måned'
@@ -88,6 +89,7 @@ export default {
     },
     filterButton: {
       ALL_TIME: 'Unlimited',
+      LAST_12_HOURS: 'Last 12 hours',
       LAST_24_HOURS: 'Last 24 hours',
       LAST_WEEK: 'Last week',
       LAST_MONTH: 'Last month'
