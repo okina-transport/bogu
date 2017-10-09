@@ -37,9 +37,19 @@ export const sortLines = (sorting, lineData, selectedSegment, daysValid) => {
     default:
       return order;
     case 1:
-      return [...order].sort();
+      return [...order].sort((a,b) => {
+        return a.localeCompare(b, 'nb', {
+          numeric: true,
+          sensitivity: 'base'
+        });
+      });
     case 2:
-      return [...order].sort().reverse();
+      return [...order].sort((a,b) => {
+        return b.localeCompare(a, 'nb', {
+          numeric: true,
+          sensitivity: 'base'
+        });
+      });
     case 3:
       let daysAsc = lineData.daysValid.slice().sort(sortMethod('days', true));
       return daysAsc
