@@ -1,7 +1,5 @@
 const buttonConfig = {
   fields: [
-    { id: 'ALL_TIME',
-    },
     {
       id: 'LAST_12_HOURS'
     },
@@ -13,6 +11,8 @@ const buttonConfig = {
     {
       id: 'LAST_MONTH'
     },
+    { id: 'ALL_TIME',
+    }
   ]
 };
 

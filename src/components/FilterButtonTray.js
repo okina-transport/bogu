@@ -4,12 +4,6 @@ import buttonConfig from './buttonConfig';
 import translations from './actionTranslations';
 
 class FilterButtonTray extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeButtonId: 'ALL_TIME'
-    };
-  }
 
   render() {
     const { locale, activeButtonId, onChange } = this.props;

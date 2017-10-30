@@ -12,7 +12,7 @@ class EventDetails extends React.Component {
     this.state = {
       activePageIndex: 0,
       endStateFilter: 'ALL',
-      dateFilter: 'ALL_TIME'
+      dateFilter: 'LAST_12_HOURS'
     };
   }
 
