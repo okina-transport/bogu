@@ -34,6 +34,7 @@ export default {
       DUPLICATE: "Feil - duplikat datasett",
       IGNORED: "Ikke gjennomført",
       CANCELLED: "Kansellert",
+      TIMEOUT: "Tidsavbrudd",
     },
     errorMessage: {
       FILE_TRANSFER: 'Filoverføring feilet',
@@ -82,6 +83,7 @@ export default {
       DUPLICATE: "Failed - duplicate data set",
       IGNORED: "Skipped",
       CANCELLED: "Cancelled",
+      TIMEOUT: "Timeout",
     },
     errorMessage: {
       FILE_TRANSFER: 'Failed to transfer file',

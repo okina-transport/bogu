@@ -2,14 +2,9 @@ import React, { PropTypes } from 'react';
 import ActionTranslations from './actionTranslations';
 import FaChevronDown from 'react-icons/lib/fa/chevron-down';
 import FaChevronUp from 'react-icons/lib/fa/chevron-up';
-import MdError from 'react-icons/lib/md/error';
-import MdDone from 'react-icons/lib/md/check-circle';
-import MdSchedule from 'react-icons/lib/md/schedule';
-import FaCog from 'react-icons/lib/fa/cog';
-import MdHelpOutLine from 'react-icons/lib/md/help-outline';
-import MdHour from 'react-icons/lib/md/hourglass-empty';
 import ControlledChouetteLink from './ControlledChouetteLink';
 import translations from './translations';
+import EventStatusIcon from './EventStatusIcon';
 
 class EventStepper extends React.Component {
   constructor(props) {
@@ -23,54 +18,6 @@ class EventStepper extends React.Component {
     groups: PropTypes.object.isRequired,
     listItem: PropTypes.object.isRequired
   };
-
-  getIconByState(state) {
-    switch (state) {
-      case 'OK':
-        return (
-          <MdDone
-            style={{ color: 'green', width: 24, height: 22, marginTop: -2 }}
-          />
-        );
-      case 'PENDING':
-        return (
-          <MdHour
-            style={{ color: 'orange', width: 24, height: 22, marginTop: -2 }}
-          />
-        );
-      case 'STARTED':
-        return (
-          <FaCog
-            style={{ color: '#2274b5', width: 24, height: 22, marginTop: -2 }}
-          />
-        );
-      case 'FAILED':
-        return (
-          <MdError
-            style={{ color: 'red', width: 24, height: 22, marginTop: -2 }}
-          />
-        );
-      case 'CANCELLED':
-        return (
-          <MdError
-            style={{ color: 'orange', width: 24, height: 22, marginTop: -2 }}
-          />
-        );
-      case 'DUPLICATE':
-        return (
-          <MdError
-            style={{ color: 'red', width: 24, height: 22, marginTop: -2 }}
-          />
-        );
-      case 'IGNORED':
-        return (
-          <MdSchedule
-            style={{ color: 'black', width: 24, height: 22, marginTop: -2 }}
-          />
-        );
-    }
-    return <MdHelpOutLine style={{ color: 'grey', width: 24, height: 22 }} />;
-  }
 
   eventStates() {
     return [
@@ -249,7 +196,7 @@ class EventStepper extends React.Component {
           title={toolTipText}
           style={{ opacity: event.missingBeforeStartStart ? 0.2 : 1 }}
         >
-          {this.getIconByState(event.endState)}
+          <EventStatusIcon state={event.endState}/>
         </div>
         <div
           style={{
