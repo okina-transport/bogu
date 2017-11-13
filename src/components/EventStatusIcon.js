@@ -8,6 +8,7 @@ import MdHour from 'react-icons/lib/md/hourglass-empty';
 
 class EventStatusIcon extends Component {
   render() {
+
     switch (this.props.state) {
       case 'OK':
         return (

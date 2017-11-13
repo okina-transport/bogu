@@ -62,7 +62,7 @@ class EventStepper extends React.Component {
     return finalGroups;
   }
 
-  handleToggleVisibility(id) {
+  handleToggleVisibility() {
     this.setState({
       expanded: !this.state.expanded
     });
@@ -88,7 +88,8 @@ class EventStepper extends React.Component {
     Object.keys(groups).forEach( group => {
       if (group === 'FILE_CLASSIFICATION' || group === 'FILE_TRANSFER') {
         endState = groups[group].endState;
-        if (endState === 'FAILED') {
+
+        if (endState === 'FAILED' || endState === 'DUPLICATE') {
           errorOn = group;
         }
         delete groups[group]
@@ -97,8 +98,9 @@ class EventStepper extends React.Component {
 
     if (endState !== null) {
       groups.FILE_DELIVERY = {
-        endState: endState,
-        errorOn: errorOn
+        endState: errorOn ? 'FAILED' : endState,
+        errorOn,
+        missingBeforeStartStart: (endState == 'IGNORED' && !errorOn)
       }
     }
     return groups;
@@ -116,7 +118,7 @@ class EventStepper extends React.Component {
       let column;
       let event = formattedGroups[group];
 
-      if (event instanceof Array) {
+      if (Array.isArray(event)) {
         column = Object.keys(event).map((key, i) => {
           return this.renderEvent(
             event[key],
