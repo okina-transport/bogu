@@ -229,7 +229,7 @@ class EventStepper extends React.Component {
 
     let formattedGroups = this.addUnlistedStates(groups);
     formattedGroups = this.aggreggateFileEvents(formattedGroups);
-    this.createCombinedSplit(formattedGroups, ['EXPORT', 'EXPORT_NETEX'], 'EXPORT');
+    this.createCombinedSplit(formattedGroups, ['EXPORT_NETEX', 'EXPORT'], 'EXPORT');
     const bullets = this.bullet(formattedGroups, groups, locale, includeLevel2);
 
     return (
@@ -275,7 +275,7 @@ class EventStepper extends React.Component {
               display: 'flex',
               padding: 8,
               flexDirection: 'column',
-              lineHeight: '25px',
+              lineHeight: 25,
               marginTop: 10,
               cursor: 'default'
             }}
