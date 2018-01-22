@@ -24,7 +24,7 @@ export default {
       UNKNOWN: "Dette steget er ukjent",
     },
     filename: {
-      undefined: "Direkteleveranse"
+      undefined: "Validering"
     },
     states: {
       OK: "Fullført",
@@ -73,7 +73,7 @@ export default {
       UNKNOWN: "This step is uknown",
     },
     filename: {
-      undefined: "Direct delivery"
+      undefined: "Validation"
     },
     states: {
       OK: "Completed",
