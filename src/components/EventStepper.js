@@ -275,7 +275,6 @@ class EventStepper extends React.Component {
               display: 'flex',
               padding: 8,
               flexDirection: 'column',
-              lineHeight: 25,
               marginTop: 10,
               cursor: 'default'
             }}
