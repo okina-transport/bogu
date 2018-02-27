@@ -189,7 +189,7 @@ const segmentMap = locale => {
         valid: 'Lignes valides',
         expiring: 'Lignes expirant',
         invalid: 'Lignes invalides',
-        dynamic: 'LIgnes expirant dans (< DAYS jours)'
+        dynamic: 'Lignes expirant (< DAYS jours)'
       };
   }
 };
@@ -202,7 +202,11 @@ const text2key = {
   'All lines': 'all',
   'Valid lines': 'valid',
   'Expiring lines': 'expiring',
-  'Invalid lines': 'invalid'
+  'Invalid lines': 'invalid',
+  'Toutes les lignes': 'all',
+  'Lignes valides': 'valid',
+  'Lignes expirant': 'expiring',
+  'Lignes invalides': 'invalid'
 };
 
 const validPeriod = (endDate, from, to) =>
