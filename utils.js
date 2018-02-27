@@ -150,14 +150,14 @@ var sortLines = exports.sortLines = function sortLines(sorting, lineData, select
       return order;
     case 1:
       return [].concat(_toConsumableArray(order)).sort(function (a, b) {
-        return a.localeCompare(b, 'fr', {
+        return a.localeCompare(b, 'nb', {
           numeric: true,
           sensitivity: 'base'
         });
       });
     case 2:
       return [].concat(_toConsumableArray(order)).sort(function (a, b) {
-        return b.localeCompare(a, 'fr', {
+        return b.localeCompare(a, 'nb', {
           numeric: true,
           sensitivity: 'base'
         });
