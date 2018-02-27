@@ -3,7 +3,7 @@ import { segmentName, segmentName2Key, validity } from '../src/utils'
 
 describe('should be able return mapping', () => {
   it('all lines: nb', () => {
-    expect(segmentName('all', 1000, 'nb')).toBe('Alle linjer')
+    expect(segmentName('all', 1000, 'fr')).toBe('Alle linjer')
     expect(segmentName2Key('Alle linjer').segment).toBe('all')
   })
 
@@ -26,13 +26,18 @@ describe('should be able return mapping', () => {
     expect(segmentName('dynamic', 12345, 'en')).toBe('Expiring lines (< 12345 days)')
     //expect(segmentName2Key('Expiring lines (< 4521 days)', 'en')).toBe({daysValid: 4521, segment: 'dynamic'})
   })
+
+  it('Dynamic: fr', () => {
+    expect(segmentName('dynamic', 12345, 'en')).toBe('Lignes expirant (< 12345 jours)')
+    //expect(segmentName2Key('Lignes expirant(< 4521 jours)', 'fr')).toBe({daysValid: 4521, segment: 'dynamic'})
+  })
 })
 
 
 describe('validity', () => {
-  it('INVALID', () => expect(validity(-12)).toBe('INVALID') )
-  it('EXPIRING', () => expect(validity(12)).toBe('EXPIRING') )
-  it('EXPIRING', () => expect(validity(0)).toBe('EXPIRING') )
-  it('VALID', () => expect(validity(120)).toBe('VALID') )
-  it('VALID', () => expect(validity(121)).toBe('VALID') )
+  it('INVALID', () => expect(validity(-12)).toBe('INVALID'))
+  it('EXPIRING', () => expect(validity(12)).toBe('EXPIRING'))
+  it('EXPIRING', () => expect(validity(0)).toBe('EXPIRING'))
+  it('VALID', () => expect(validity(120)).toBe('VALID'))
+  it('VALID', () => expect(validity(121)).toBe('VALID'))
 })

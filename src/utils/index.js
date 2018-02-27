@@ -38,14 +38,14 @@ export const sortLines = (sorting, lineData, selectedSegment, daysValid) => {
       return order;
     case 1:
       return [...order].sort((a,b) => {
-        return a.localeCompare(b, 'nb', {
+        return a.localeCompare(b, 'fr', {
           numeric: true,
           sensitivity: 'base'
         });
       });
     case 2:
       return [...order].sort((a,b) => {
-        return b.localeCompare(a, 'nb', {
+        return b.localeCompare(a, 'fr', {
           numeric: true,
           sensitivity: 'base'
         });
@@ -182,6 +182,14 @@ const segmentMap = locale => {
         expiring: 'Expiring lines',
         invalid: 'Invalid lines',
         dynamic: 'Expiring lines (< DAYS days)'
+      };
+    case 'fr':
+      return {
+        all: 'Toutes les lignes',
+        valid: 'Lignes valides',
+        expiring: 'Lignes expirant',
+        invalid: 'Lignes invalides',
+        dynamic: 'LIgnes expirant dans (< DAYS jours)'
       };
   }
 };

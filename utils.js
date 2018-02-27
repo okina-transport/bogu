@@ -150,14 +150,14 @@ var sortLines = exports.sortLines = function sortLines(sorting, lineData, select
       return order;
     case 1:
       return [].concat(_toConsumableArray(order)).sort(function (a, b) {
-        return a.localeCompare(b, 'nb', {
+        return a.localeCompare(b, 'fr', {
           numeric: true,
           sensitivity: 'base'
         });
       });
     case 2:
       return [].concat(_toConsumableArray(order)).sort(function (a, b) {
-        return b.localeCompare(a, 'nb', {
+        return b.localeCompare(a, 'fr', {
           numeric: true,
           sensitivity: 'base'
         });
@@ -318,6 +318,14 @@ var segmentMap = function segmentMap(locale) {
         expiring: 'Expiring lines',
         invalid: 'Invalid lines',
         dynamic: 'Expiring lines (< DAYS days)'
+      };
+    case 'fr':
+      return {
+        all: 'Toutes les lignes',
+        valid: 'Lignes valides',
+        expiring: 'Lignes expirant',
+        invalid: 'Lignes invalides',
+        dynamic: 'LIgnes expirant dans (< DAYS jours)'
       };
   }
 };
