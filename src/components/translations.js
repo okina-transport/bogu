@@ -20,6 +20,17 @@ export default {
     show_only_failed: 'Vis kun feilet',
     show_only_success: 'Vis kun vellykket',
     show_only_cancelled: "Vis kun kansellerte",
+  },
+  "fr": {
+    page: 'Page: ',
+    no_status: 'Aucun résultat avec ces critères',
+    started: 'Démarré',
+    ended: 'Terluné',
+    duration: 'Durée: ',
+    show_all: 'Montrer tous',
+    show_only_failed: 'Montrer seulement les échecs',
+    show_only_success: 'Monter seulement les succès',
+    show_only_cancelled: "Montrer seulement les anuulés"
   }
 }
 

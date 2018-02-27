@@ -325,8 +325,58 @@ exports.default = {
       LAST_24_HOURS: 'Last 24 hours',
       LAST_WEEK: 'Last week',
       LAST_MONTH: 'Last month'
+    },
+  },
+  "fr": {
+    text: {
+      FILE_TRANSFER: "Transfert de fichiers",
+      FILE_CLASSIFICATION: "Classification de fichiers",
+      FILE_DELIVERY: 'Livraison de fichier',
+      IMPORT: "Import",
+      EXPORT: "GTFS export",
+      EXPORT_NETEX: "NeTEx export",
+      VALIDATION_LEVEL_1: "Validation niveau 1",
+      DATASPACE_TRANSFER: "Transfert vers l'espace de données principal",
+      VALIDATION_LEVEL_2: "Validation niveau 2",
+      BUILD_GRAPH: "Construire le graphe",
+      UNKNOWN: "Etape inconnue"
+    },
+    title: {
+      FILE_TRANSFER: "Envoyer un fichier local vers le serveur distant",
+      IMPORT: "Validation de fichier et import dans l'espace de données local - niveau 1",
+      EXPORT: "Export des données topologiques ",
+      VALIDATION_LEVEL_1: "Validation de l'espace de données complet - niveau 1",
+      VALIDATION_LEVEL_2: "Validation de l'espace de données complet - niveau 2",
+      DATASPACE_TRANSFER: "Transfer vers l'espace de données principal - niveau 2",
+      BUILD_GRAPH: "Construire le graphe",
+      UNKNOWN: "Etape inconnue"
+    },
+    filename: {
+      undefined: "Validation"
+    },
+    states: {
+      OK: "Terminé",
+      PENDING: "En attente",
+      STARTED: "Démarré",
+      FAILED: "Echoué",
+      DUPLICATE: "Echoué - données à insérer en doucle",
+      IGNORED: "Ignoré",
+      CANCELLED: "Anuulé",
+      TIMEOUT: "Erreur - temps écoulé"
+    },
+    errorMessage: {
+      FILE_TRANSFER: 'Echec lors du transfert du fichier',
+      FILE_CLASSIFICATION: 'Echec lors de la classification de fichiers'
+    },
+    filterButton: {
+      ALL_TIME: 'Tous',
+      LAST_12_HOURS: 'Les dernières 12 heures',
+      LAST_24_HOURS: 'Les dernières 24 heures',
+      LAST_WEEK: 'La semaine dernière',
+      LAST_MONTH: 'Le mois dernier.'
     }
   }
+
 };
 
 /***/ }),
@@ -412,6 +462,17 @@ exports.default = {
     show_only_failed: 'Vis kun feilet',
     show_only_success: 'Vis kun vellykket',
     show_only_cancelled: "Vis kun kansellerte"
+  },
+  "fr": {
+    page: 'Page: ',
+    no_status: 'Aucun résultat avec ces critères',
+    started: 'Démarré',
+    ended: 'Terluné',
+    duration: 'Durée: ',
+    show_all: 'Montrer tous',
+    show_only_failed: 'Montrer seulement les échecs',
+    show_only_success: 'Monter seulement les succès',
+    show_only_cancelled: "Montrer seulement les anuulés"
   }
 };
 

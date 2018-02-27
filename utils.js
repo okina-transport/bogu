@@ -319,6 +319,14 @@ var segmentMap = function segmentMap(locale) {
         invalid: 'Invalid lines',
         dynamic: 'Expiring lines (< DAYS days)'
       };
+    case 'fr':
+      return {
+        all: 'Toutes les lignes',
+        valid: 'Lignes valides',
+        expiring: 'Lignes expirant',
+        invalid: 'Lignes invalides',
+        dynamic: 'LIgnes expirant dans (< DAYS jours)'
+      };
   }
 };
 
