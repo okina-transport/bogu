@@ -38,14 +38,14 @@ export const sortLines = (sorting, lineData, selectedSegment, daysValid) => {
       return order;
     case 1:
       return [...order].sort((a,b) => {
-        return a.localeCompare(b, 'fr', {
+        return a.localeCompare(b, 'nb', {
           numeric: true,
           sensitivity: 'base'
         });
       });
     case 2:
       return [...order].sort((a,b) => {
-        return b.localeCompare(a, 'fr', {
+        return b.localeCompare(a, 'nb', {
           numeric: true,
           sensitivity: 'base'
         });
