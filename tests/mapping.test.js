@@ -12,6 +12,11 @@ describe('should be able return mapping', () => {
     expect(segmentName2Key('All lines').segment).toBe('all')
   })
 
+  it('all lines: fr', () => {
+    expect(segmentName('all', 1000, 'fr')).toBe('Toutes les lignes')
+    expect(segmentName2Key('Toutes les lignes').segment).toBe('all')
+  })
+
   it('all lines: default', () => {
     expect(segmentName('all', 1000)).toBe('All lines')
     expect(segmentName2Key('All lines').segment).toBe('all')
