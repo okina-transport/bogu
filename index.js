@@ -340,24 +340,24 @@ exports.default = {
     text: {
       FILE_TRANSFER: "Transfert de fichiers",
       FILE_CLASSIFICATION: "Classification de fichiers",
-      FILE_DELIVERY: 'Livraison de fichier',
+      FILE_DELIVERY: 'Import de fichier',
       IMPORT: "Import",
-      EXPORT: "GTFS export",
-      EXPORT_NETEX: "NeTEx export",
+      EXPORT: "Export GTFS",
+      EXPORT_NETEX: "Export Netex",
       VALIDATION_LEVEL_1: "Validation niveau 1",
-      DATASPACE_TRANSFER: "Transfert vers l'espace de données principal",
+      DATASPACE_TRANSFER: "Transfert vers l'espace de données central",
       VALIDATION_LEVEL_2: "Validation niveau 2",
-      BUILD_GRAPH: "Construire le graphe",
+      BUILD_GRAPH: "Construction du graphe",
       UNKNOWN: "Etape inconnue"
     },
     title: {
       FILE_TRANSFER: "Envoyer un fichier local vers le serveur distant",
       IMPORT: "Validation de fichier et import dans l'espace de données local - niveau 1",
       EXPORT: "Export des données topologiques ",
-      VALIDATION_LEVEL_1: "Validation de l'espace de données complet - niveau 1",
-      VALIDATION_LEVEL_2: "Validation de l'espace de données complet - niveau 2",
-      DATASPACE_TRANSFER: "Transfer vers l'espace de données principal - niveau 2",
-      BUILD_GRAPH: "Construire le graphe",
+      VALIDATION_LEVEL_1: "Validation de l'espace de données local - niveau 1",
+      VALIDATION_LEVEL_2: "Validation de l'espace de données central - niveau 2",
+      DATASPACE_TRANSFER: "Transfer vers l'espace de données central - niveau 2",
+      BUILD_GRAPH: "Construction du graphe",
       UNKNOWN: "Etape inconnue"
     },
     filename: {
@@ -475,12 +475,12 @@ exports.default = {
     page: 'Page: ',
     no_status: 'Aucun résultat avec ces critères',
     started: 'Démarré',
-    ended: 'Terluné',
+    ended: 'Terminé',
     duration: 'Durée: ',
     show_all: 'Montrer tous',
     show_only_failed: 'Montrer seulement les échecs',
     show_only_success: 'Monter seulement les succès',
-    show_only_cancelled: "Montrer seulement les anuulés"
+    show_only_cancelled: "Montrer seulement les annulés"
   }
 };
 
@@ -585,7 +585,7 @@ var stylesInDom = {},
 	isOldIE = memoize(function() {
 		// Test for IE <= 9 as proposed by Browserhacks
 		// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-		// Tests for existence of standard globals is to allow style-loader 
+		// Tests for existence of standard globals is to allow style-loader
 		// to operate correctly into non-standard environments
 		// @see https://github.com/webpack-contrib/style-loader/issues/177
 		return window && document && document.all && !window.atob;
@@ -2387,7 +2387,7 @@ exports.locals = {
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * 
+ *
  */
 
 function makeEmptyFunction(arg) {

@@ -25,7 +25,7 @@ export default {
     page: 'Page: ',
     no_status: 'Aucun résultat avec ces critères',
     started: 'Démarré',
-    ended: 'Terluné',
+    ended: 'Terminé',
     duration: 'Durée: ',
     show_all: 'Montrer tous',
     show_only_failed: 'Montrer seulement les échecs',
