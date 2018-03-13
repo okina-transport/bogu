@@ -29,7 +29,7 @@ class EventStepper extends React.Component {
       'DATASPACE_TRANSFER',
       'VALIDATION_LEVEL_2',
       'EXPORT',
-      'BUILD_GRAPH',
+      // 'BUILD_GRAPH',
       'EXPORT_NETEX'
     ];
   }
