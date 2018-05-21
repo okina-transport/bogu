@@ -148,7 +148,7 @@ class LineStatsCard extends React.Component {
                     <div style={{display: 'block', margin: 10, padding: 6, background: color.tableHeader, opacity: '0.8', borderRadius: 7}}>
                       <div style={sortIconStyle} onClick={this.changeSorting.bind(this)} title="Sorter linjer">{this.sortIcon()}</div>
                       <div style={validDateStartStyle}>{stats.data.startDate}</div>
-                      <div style={validDateMiddleStyle}>{stats.data.validFromDate} (120 dager)</div>
+                      <div style={validDateMiddleStyle}>{stats.data.validFromDate} (90 dager)</div>
                       <div style={validDateEndStyle}>{stats.data.endDate}</div>
                     </div>
                     <div

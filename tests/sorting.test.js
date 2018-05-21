@@ -85,8 +85,8 @@ describe('should be able to sort lines', () => {
     const sorted = sortLines(1, data, 'all')
     expect(sorted).toEqual([
       ' dsd',
-      '12345',
       '_dsd',
+      '12345',
       'a123',
       'alpha',
       'beta',
@@ -105,8 +105,8 @@ describe('should be able to sort lines', () => {
       'beta',
       'alpha',
       'a123',
-      '_dsd',
       '12345',
+      '_dsd',
       ' dsd',
     ])
   })
@@ -168,7 +168,7 @@ describe('should be able to sort lines', () => {
     let sorted1b = sortLines(1, data, 'all')
 
 
-    let sorted1expected = [' dsd', '12345', '_dsd', 'a123', 'alpha', 'beta', 'hest', 'next', 'zzzz'];
+    let sorted1expected = [' dsd', '_dsd', '12345', 'a123', 'alpha', 'beta', 'hest', 'next', 'zzzz'];
     expect(sorted1a).toEqual(sorted1expected)
     expect(sorted1b).toEqual(sorted1expected)
     expect(sorted1a).not.toBe(sorted1b)
@@ -181,8 +181,8 @@ describe('should be able to sort lines', () => {
       'beta',
       'alpha',
       'a123',
-      '_dsd',
       '12345',
+      '_dsd',
       ' dsd',
     ])
   })
