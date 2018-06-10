@@ -26,7 +26,8 @@ class EventDetails extends React.Component {
 
   handleFilterChange(dateFilter) {
     this.setState({
-      dateFilter: dateFilter
+      dateFilter: dateFilter,
+      activePageIndex: 0
     });
   }
 
@@ -120,7 +121,8 @@ class EventDetails extends React.Component {
               style={{ margin: '0 10px' }}
               onChange={e => {
                 this.setState({
-                  onlyNewDeliveryFilter: e.target.checked
+                  onlyNewDeliveryFilter: e.target.checked,
+                  activePageIndex: 0
                 });
               }}
             />
