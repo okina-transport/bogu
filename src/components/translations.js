@@ -9,6 +9,7 @@ export default {
     show_only_failed: 'Show only failed',
     show_only_success: 'Show only successful',
     show_only_cancelled: "Show only cancelled",
+    filter_direct_delivery: "Only started with file delivery"
   },
   "nb": {
     page: 'Side: ',
@@ -20,6 +21,7 @@ export default {
     show_only_failed: 'Vis kun feilet',
     show_only_success: 'Vis kun vellykket',
     show_only_cancelled: "Vis kun kansellerte",
+    filter_direct_delivery: "Kun startet ved filleveranse"
   }
 }
 

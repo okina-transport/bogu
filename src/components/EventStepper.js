@@ -82,17 +82,17 @@ class EventStepper extends React.Component {
   }
 
   aggreggateFileEvents(data) {
-    let groups = {...data};
+    let groups = { ...data };
     let endState = null;
     let errorOn = null;
-    Object.keys(groups).forEach( group => {
+    Object.keys(groups).forEach(group => {
       if (group === 'FILE_CLASSIFICATION' || group === 'FILE_TRANSFER') {
         endState = groups[group].endState;
 
         if (endState === 'FAILED' || endState === 'DUPLICATE') {
           errorOn = group;
         }
-        delete groups[group]
+        delete groups[group];
       }
     });
 
@@ -100,8 +100,8 @@ class EventStepper extends React.Component {
       groups.FILE_DELIVERY = {
         endState: errorOn ? 'FAILED' : endState,
         errorOn,
-        missingBeforeStartStart: (endState == 'IGNORED' && !errorOn)
-      }
+        missingBeforeStartStart: endState == 'IGNORED' && !errorOn
+      };
     }
     return groups;
   }
@@ -143,7 +143,11 @@ class EventStepper extends React.Component {
           includeLevel2
         );
       }
-      return <div key={'bullet-' + index} style={columnStyle}>{column}</div>;
+      return (
+        <div key={'bullet-' + index} style={columnStyle}>
+          {column}
+        </div>
+      );
     });
   }
 
@@ -198,7 +202,7 @@ class EventStepper extends React.Component {
           title={toolTipText}
           style={{ opacity: event.missingBeforeStartStart ? 0.2 : 1 }}
         >
-          <EventStatusIcon state={event.endState}/>
+          <EventStatusIcon state={event.endState} />
         </div>
         <div
           style={{
@@ -229,7 +233,11 @@ class EventStepper extends React.Component {
 
     let formattedGroups = this.addUnlistedStates(groups);
     formattedGroups = this.aggreggateFileEvents(formattedGroups);
-    this.createCombinedSplit(formattedGroups, ['EXPORT_NETEX', 'EXPORT'], 'EXPORT');
+    this.createCombinedSplit(
+      formattedGroups,
+      ['EXPORT_NETEX', 'EXPORT'],
+      'EXPORT'
+    );
     const bullets = this.bullet(formattedGroups, groups, locale, includeLevel2);
 
     return (
@@ -252,10 +260,11 @@ class EventStepper extends React.Component {
             {listItem.started}
           </div>
           {listItem.provider &&
-            listItem.provider.name &&
-            <div style={{ fontSize: '0.8em', fontWeight: 600, flex: 1 }}>
-              {listItem.provider.name}
-            </div>}
+            listItem.provider.name && (
+              <div style={{ fontSize: '0.8em', fontWeight: 600, flex: 1 }}>
+                {listItem.provider.name}
+              </div>
+            )}
           <div style={{ fontSize: '0.9em', fontWeight: 600, flex: 2 }}>
             {listItem.fileName || ActionTranslations[locale].filename.undefined}
           </div>
@@ -269,7 +278,7 @@ class EventStepper extends React.Component {
             {!expanded ? <FaChevronDown /> : <FaChevronUp />}
           </div>
         </div>
-        {expanded &&
+        {expanded && (
           <div
             style={{
               display: 'flex',
@@ -298,7 +307,8 @@ class EventStepper extends React.Component {
               </span>
               {listItem.duration}
             </div>
-          </div>}
+          </div>
+        )}
       </div>
     );
   }
