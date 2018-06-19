@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import EventStepper from './EventStepper';
 import './EventDetails.css';
-const FaFresh = require('react-icons/lib/fa/refresh');
+import FaFresh from 'react-icons/lib/fa/refresh';
 import translations from './translations';
 import FilterButtonTray from './FilterButtonTray';
 import { getLastValidDate } from './buttonConfig';
@@ -13,7 +13,7 @@ class EventDetails extends React.Component {
       activePageIndex: 0,
       endStateFilter: 'ALL',
       dateFilter: props.showDateFilter ? 'LAST_12_HOURS' : 'ALL_TIME',
-      onlyNewDeliveryFilter: props.onlyNewDeliveryFilter
+      onlyNewDeliveryFilter: false
     };
   }
 
@@ -32,14 +32,14 @@ class EventDetails extends React.Component {
   }
 
   getFilteredSource(
-    dataSource = [],
+    dataSource,
     dateFilter,
     endStateFilter,
     onlyNewDeliveryFilter
   ) {
     const lastDate = getLastValidDate(dateFilter);
 
-    return dataSource.filter(event => {
+    return (dataSource || []).filter(event => {
       const appliedFilter = [];
 
       /* Filter by date from pre-defined periods */
@@ -130,7 +130,7 @@ class EventDetails extends React.Component {
               type="checkbox"
               id="direct_delivery"
               name="direct_delivery"
-              value={onlyNewDeliveryFilter}
+              checked={onlyNewDeliveryFilter}
               style={{ margin: '0 10px' }}
               onChange={e => {
                 this.setState({
