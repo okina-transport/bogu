@@ -13,7 +13,7 @@ class EventDetails extends React.Component {
       activePageIndex: 0,
       endStateFilter: 'ALL',
       dateFilter: props.showDateFilter ? 'LAST_12_HOURS' : 'ALL_TIME',
-      onlyNewDeliveryFilter: false
+      onlyNewDeliveryFilter: props.onlyNewDeliveryFilter
     };
   }
 
@@ -31,24 +31,15 @@ class EventDetails extends React.Component {
     });
   }
 
-  render() {
-    const {
-      dataSource = [],
-      locale,
-      includeLevel2,
-      showDateFilter,
-      showNewDeliveriesFilter
-    } = this.props;
-    const {
-      activePageIndex,
-      endStateFilter,
-      dateFilter,
-      onlyNewDeliveryFilter
-    } = this.state;
-
+  getFilteredSource(
+    dataSource = [],
+    dateFilter,
+    endStateFilter,
+    onlyNewDeliveryFilter
+  ) {
     const lastDate = getLastValidDate(dateFilter);
 
-    let filteredSource = dataSource.filter(event => {
+    return dataSource.filter(event => {
       const appliedFilter = [];
 
       /* Filter by date from pre-defined periods */
@@ -78,7 +69,29 @@ class EventDetails extends React.Component {
 
       return appliedFilter.every(filter => filter);
     });
+  }
 
+  render() {
+    const {
+      dataSource,
+      locale,
+      includeLevel2,
+      showDateFilter,
+      showNewDeliveriesFilter
+    } = this.props;
+    const {
+      activePageIndex,
+      endStateFilter,
+      dateFilter,
+      onlyNewDeliveryFilter
+    } = this.state;
+
+    const filteredSource = this.getFilteredSource(
+      dataSource,
+      dateFilter,
+      endStateFilter,
+      onlyNewDeliveryFilter
+    );
     const paginationMap = getPaginationMap(filteredSource);
 
     const filters = (
@@ -126,7 +139,9 @@ class EventDetails extends React.Component {
                 });
               }}
             />
-            <label htmlFor="direct_delivery">{translations[locale].filter_direct_delivery}</label>
+            <label htmlFor="direct_delivery">
+              {translations[locale].filter_direct_delivery}
+            </label>
           </div>
         )}
       </div>
