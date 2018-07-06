@@ -101,7 +101,7 @@ export default {
     text: {
       FILE_TRANSFER: "Transfert de fichiers",
       FILE_CLASSIFICATION: "Classification de fichiers",
-      FILE_DELIVERY: 'Livraison de fichier',
+      FILE_DELIVERY: 'Format de fichier',
       IMPORT: "Import",
       EXPORT: "GTFS export",
       EXPORT_NETEX: "NeTEx export",
