@@ -15,6 +15,7 @@ const EventsExample = props => {
         dataSource={dataSource}
         locale="nb"
         showDateFilter={true}
+        showNewDeliveriesFilter={true}
       />
     </div>
   )

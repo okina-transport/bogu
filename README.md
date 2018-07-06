@@ -30,10 +30,10 @@ Checklist includes:
 
 # NPM install
 Bogu is installed with npm from github using the following command: 
-`npm install --save git+ssh://git@github.com:rutebanken/bogu.git#0.1.3`
+`npm install --save git+ssh://git@github.com:entur/bogu.git#0.1.3`
 
 Alternatively it can be added to `package.json` like so
 
-`"bogu": "git@github.com:rutebanken/bogu.git#0.1.3"`
+`"bogu": "git@github.com:entur/bogu.git#0.1.3"`
 
 It is important to refer to a specific version, in this case version `#0.1.3`

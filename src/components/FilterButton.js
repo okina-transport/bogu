@@ -13,12 +13,12 @@ class FilterButton extends Component {
     const activeStyle = {
       background: '#2196F3',
       color: '#fff',
-      border: '1px solid #15599d',
+      border: '1px solid #15599d'
     };
     const inactiveStyle = {
       background: '#fff',
       color: '#000',
-      border: '1px solid #d8d8d8',
+      border: '1px solid #d8d8d8'
     };
     const defaultStyle = {
       padding: '0.2em 0.4em',

@@ -671,7 +671,7 @@ export default [
         state: 'FAILED',
         date: 1499087652919,
         action: 'VALIDATION_LEVEL_1',
-        chouetteJobId: 3743,
+        chouetteJobId: null,
         referential: 'rut'
       }
     ],
@@ -841,7 +841,7 @@ export default [
         state: 'FAILED',
         date: 1499172470624,
         action: 'VALIDATION_LEVEL_1',
-        chouetteJobId: 3801,
+        chouetteJobId: null,
         referential: 'rut'
       }
     ],

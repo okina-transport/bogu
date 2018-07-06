@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import EventStepper from './EventStepper';
 import './EventDetails.css';
-const FaFresh = require('react-icons/lib/fa/refresh');
+import FaFresh from 'react-icons/lib/fa/refresh';
 import translations from './translations';
 import FilterButtonTray from './FilterButtonTray';
 import { getLastValidDate } from './buttonConfig';
@@ -12,9 +12,8 @@ class EventDetails extends React.Component {
     this.state = {
       activePageIndex: 0,
       endStateFilter: 'ALL',
-      dateFilter: props.showDateFilter
-        ? 'LAST_12_HOURS'
-        : 'ALL_TIME'
+      dateFilter: props.showDateFilter ? 'LAST_12_HOURS' : 'ALL_TIME',
+      onlyNewDeliveryFilter: false
     };
   }
 
@@ -27,32 +26,73 @@ class EventDetails extends React.Component {
 
   handleFilterChange(dateFilter) {
     this.setState({
-      dateFilter: dateFilter
+      dateFilter: dateFilter,
+      activePageIndex: 0
+    });
+  }
+
+  getFilteredSource(
+    dataSource,
+    dateFilter,
+    endStateFilter,
+    onlyNewDeliveryFilter
+  ) {
+    const lastDate = getLastValidDate(dateFilter);
+
+    return (dataSource || []).filter(event => {
+      const appliedFilter = [];
+
+      /* Filter by date from pre-defined periods */
+      if (lastDate) {
+        const filterByPeriod = new Date(event.firstEvent) > lastDate;
+        appliedFilter.push(filterByPeriod);
+      }
+
+      /* Filter by end state from dropdown */
+      const endStateFilterApplied =
+        endStateFilter === 'FAILED' ||
+        endStateFilter === 'OK' ||
+        endStateFilter === 'CANCELLED';
+
+      if (endStateFilterApplied) {
+        const filterByEndState = event.endState === endStateFilter;
+        appliedFilter.push(filterByEndState);
+      }
+
+      /* Filter by only new deliveries */
+      const containsEvents = Array.isArray(event.events) && event.events.length;
+
+      if (containsEvents && onlyNewDeliveryFilter) {
+        const filterByNewDelivery = event.events[0].action === 'FILE_TRANSFER';
+        appliedFilter.push(filterByNewDelivery);
+      }
+
+      return appliedFilter.every(filter => filter);
     });
   }
 
   render() {
-    const { dataSource, locale, includeLevel2, showDateFilter } = this.props;
-    const { activePageIndex, endStateFilter, dateFilter } = this.state;
+    const {
+      dataSource,
+      locale,
+      includeLevel2,
+      showDateFilter,
+      showNewDeliveriesFilter
+    } = this.props;
+    const {
+      activePageIndex,
+      endStateFilter,
+      dateFilter,
+      onlyNewDeliveryFilter
+    } = this.state;
 
-    let filteredPages = null;
-    const lastDate = getLastValidDate(dateFilter);
-
-    const filteredByDate = (dataSource || []).filter(event => {
-      if (!lastDate) return event;
-      return new Date(event.firstEvent) > lastDate;
-    });
-
-    if (
-      endStateFilter === 'FAILED' ||
-      endStateFilter === 'OK' ||
-      endStateFilter === 'CANCELLED'
-    ) {
-      filteredPages = (filteredByDate || [])
-        .filter(event => event.endState === endStateFilter);
-    }
-
-    let paginationMap = getPaginationMap(filteredPages || filteredByDate);
+    const filteredSource = this.getFilteredSource(
+      dataSource,
+      dateFilter,
+      endStateFilter,
+      onlyNewDeliveryFilter
+    );
+    const paginationMap = getPaginationMap(filteredSource);
 
     const filters = (
       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -76,26 +116,47 @@ class EventDetails extends React.Component {
             {translations[locale].show_only_failed}
           </option>
         </select>
-        {showDateFilter &&
+        {showDateFilter && (
           <FilterButtonTray
             locale={locale}
             style={{ marginLeft: 20 }}
             activeButtonId={this.state.dateFilter}
             onChange={this.handleFilterChange.bind(this)}
-          />}
+          />
+        )}
+        {showNewDeliveriesFilter && (
+          <div style={{ marginLeft: 10, paddingTop: 2 }}>
+            <input
+              type="checkbox"
+              id="direct_delivery"
+              name="direct_delivery"
+              checked={onlyNewDeliveryFilter}
+              style={{ margin: '0 10px' }}
+              onChange={e => {
+                this.setState({
+                  onlyNewDeliveryFilter: e.target.checked,
+                  activePageIndex: 0
+                });
+              }}
+            />
+            <label htmlFor="direct_delivery">
+              {translations[locale].filter_direct_delivery}
+            </label>
+          </div>
+        )}
       </div>
     );
 
     const page = paginationMap[activePageIndex];
 
-    const refreshButton =
-      this.props.handleRefresh &&
+    const refreshButton = this.props.handleRefresh && (
       <div style={{ marginRight: 15, float: 'right', cursor: 'pointer' }}>
         <FaFresh
           style={{ transform: 'scale(1.5)' }}
           onClick={this.props.handleRefresh}
         />
-      </div>;
+      </div>
+    );
 
     if (page && page.length && paginationMap) {
       return (
@@ -107,9 +168,10 @@ class EventDetails extends React.Component {
           <div className="page-link-parent">
             <span>{translations[locale].page}</span>
             {paginationMap.map((page, index) => {
-              const isActive = index == activePageIndex
-                ? 'page-link active-link'
-                : 'page-link inactive-link';
+              const isActive =
+                index == activePageIndex
+                  ? 'page-link active-link'
+                  : 'page-link inactive-link';
               return (
                 <span
                   className={isActive}
@@ -171,9 +233,7 @@ class EventDetails extends React.Component {
             <div style={{ fontWeight: 600 }}>
               {translations[locale].no_status}
             </div>
-            <div style={{ marginLeft: 10 }}>
-              {refreshButton}
-            </div>
+            <div style={{ marginLeft: 10 }}>{refreshButton}</div>
           </div>
         </div>
       );
