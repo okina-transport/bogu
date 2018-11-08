@@ -13,7 +13,7 @@ const EventsExample = props => {
         includeLevel2={true}
         handleRefresh={() => {}}
         dataSource={dataSource}
-        locale="nb"
+        locale="fr"
         showDateFilter={true}
         showNewDeliveriesFilter={true}
       />

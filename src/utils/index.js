@@ -132,14 +132,14 @@ export const sortIcon = sorting => {
 export const validity = daysForward => {
   if (daysForward < 0 || daysForward === Infinity) {
     return 'INVALID';
-  } else if (daysForward >= 90) {
+  } else if (daysForward >= 30) {
     return 'VALID';
   }
   return 'EXPIRING';
 };
 
 export const segmentColor = (daysValid, modifier = 0) => {
-  let green = 90 + daysValid + modifier;
+  let green = 30 + daysValid + modifier;
   return '#FF' + green.toString(16) + '00';
 };
 
@@ -345,7 +345,7 @@ export const formatLineStats = lineStats => {
     formattedLines.linesMap = linesMap;
     formattedLines.validDaysOffset = 33;
     formattedLines.validFromDate = moment(startDate)
-      .add(90, 'days')
+      .add(30, 'days')
       .format('YYYY-MM-DD');
     formattedLines.daysValid = validDays(lineStats.publicLines);
     formattedLines.minDays = minDays(formattedLines.daysValid);
