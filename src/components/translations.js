@@ -9,7 +9,10 @@ export default {
     show_only_failed: 'Show only failed',
     show_only_success: 'Show only successful',
     show_only_cancelled: "Show only cancelled",
-    filter_direct_delivery: "Only started with file delivery"
+    filter_direct_delivery: "Only started with file delivery",
+    description: "Description",
+    user: "User",
+    file_type: "Format"
   },
   "nb": {
     page: 'Side: ',
@@ -21,19 +24,25 @@ export default {
     show_only_failed: 'Vis kun feilet',
     show_only_success: 'Vis kun vellykket',
     show_only_cancelled: "Vis kun kansellerte",
-    filter_direct_delivery: "Kun startet ved filleveranse"
+    filter_direct_delivery: "Kun startet ved filleveranse",
+    description: "Description",
+    user: "User",
+    file_type: "Format"
   },
   "fr": {
     page: 'Page: ',
     no_status: 'Aucun résultat avec ces critères',
-    started: 'Démarré',
+    started: 'Date',
     ended: 'Terminé',
     duration: 'Durée: ',
     show_all: 'Montrer tous',
     show_only_failed: 'Montrer seulement les échecs',
     show_only_success: 'Monter seulement les succès',
     show_only_cancelled: "Montrer seulement les anuulés",
-    filter_direct_delivery: "Filtrer seulement ceux avec livraison de fichier"
+    filter_direct_delivery: "Filtrer seulement ceux avec livraison de fichier",
+    description: "Description",
+    user: "Utilisateur",
+    file_type: "Format"
   }
 }
 

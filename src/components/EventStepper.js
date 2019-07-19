@@ -246,7 +246,7 @@ class EventStepper extends React.Component {
         style={{ margin: 'auto', width: '98%', cursor: 'pointer' }}
         onClick={() => this.handleToggleVisibility()}
       >
-        <div style={{ display: 'flex', marginLeft: -15 }}>
+        <div style={{ display: 'flex', marginLeft: -15, alignItems: 'baseline' }}>
           <div
             title={translations[locale].duration + listItem.duration}
             style={{
@@ -291,21 +291,27 @@ class EventStepper extends React.Component {
           >
             <div>
               <span style={{ fontWeight: 600, marginRight: 10 }}>
+                {translations[locale].user}
+              </span>
+              {listItem.user}
+            </div>
+            <div>
+              <span style={{ fontWeight: 600, marginRight: 10 }}>
+                {translations[locale].description}
+              </span>
+              {listItem.description}
+            </div>
+            <div>
+              <span style={{ fontWeight: 600, marginRight: 10 }}>
+                {translations[locale].file_type}
+              </span>
+              {listItem.type}
+            </div>
+            <div>
+              <span style={{ fontWeight: 600, marginRight: 10 }}>
                 {translations[locale].started}
               </span>
               {listItem.firstEvent}
-            </div>
-            <div>
-              <span style={{ fontWeight: 600, marginRight: 10 }}>
-                {translations[locale].ended}
-              </span>
-              {listItem.lastEvent}
-            </div>
-            <div>
-              <span style={{ fontWeight: 600, marginRight: 10 }}>
-                {translations[locale].duration}
-              </span>
-              {listItem.duration}
             </div>
           </div>
         )}
