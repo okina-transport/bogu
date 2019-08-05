@@ -293,7 +293,7 @@ class EventStepper extends React.Component {
               <span style={{ fontWeight: 600, marginRight: 10 }}>
                 {translations[locale].username}
               </span>
-              {listItem.user}
+              {listItem.username}
             </div>
             <div>
               <span style={{ fontWeight: 600, marginRight: 10 }}>
