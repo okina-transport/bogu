@@ -28,7 +28,7 @@ class EventStepper extends React.Component {
       'VALIDATION_LEVEL_1',
       'DATASPACE_TRANSFER',
       'VALIDATION_LEVEL_2',
-      'EXPORT',
+      // 'EXPORT',
       // 'BUILD_GRAPH',
       'EXPORT_NETEX'
     ];
@@ -68,18 +68,18 @@ class EventStepper extends React.Component {
     });
   }
 
-  createCombinedSplit(formattedGroups, groups, name) {
-    const combined = [];
-    for (let i in groups) {
-      const group = groups[i];
-      combined[group] = formattedGroups[group];
-
-      if (name !== group) {
-        delete formattedGroups[group];
-      }
-    }
-    formattedGroups[name] = combined;
-  }
+  // createCombinedSplit(formattedGroups, groups, name) {
+  //   const combined = [];
+  //   for (let i in groups) {
+  //     const group = groups[i];
+  //     combined[group] = formattedGroups[group];
+  //
+  //     if (name !== group) {
+  //       delete formattedGroups[group];
+  //     }
+  //   }
+  //   formattedGroups[name] = combined;
+  // }
 
   aggreggateFileEvents(data) {
     let groups = { ...data };
@@ -233,11 +233,11 @@ class EventStepper extends React.Component {
 
     let formattedGroups = this.addUnlistedStates(groups);
     formattedGroups = this.aggreggateFileEvents(formattedGroups);
-    this.createCombinedSplit(
-      formattedGroups,
-      ['EXPORT_NETEX', 'EXPORT'],
-      'EXPORT'
-    );
+    // this.createCombinedSplit(
+    //   formattedGroups,
+    //   ['EXPORT_NETEX', 'EXPORT'],
+    //   'EXPORT'
+    // );
     const bullets = this.bullet(formattedGroups, groups, locale, includeLevel2);
 
     return (
