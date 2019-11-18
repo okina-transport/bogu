@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ChouetteLink = ({ action, id, referential, children }) => {
-  const baseURL = `${window.config.chouetteBaseUrl}#/`;
+  const baseURL = `${window.config.chouetteBaseUrl}/#`;
 
   const actionMap = {
     "importer": `e-iti/imports/${referential}/${id}`,
