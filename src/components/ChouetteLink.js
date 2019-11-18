@@ -1,14 +1,14 @@
 import React from 'react';
 
 const ChouetteLink = ({ action, id, referential, children }) => {
-  const baseURL = `${window.config.chouetteBaseUrl}referentials/`;
+  const baseURL = `${window.config.chouetteBaseUrl}/#/`;
 
   const actionMap = {
-    importer: `imports/${id}/compliance_check`,
-    exporter: `exports/${id}/compliance_check`,
-    validator: `compliance_checks/${id}/report`
-  };
-  const URL = `${baseURL}${referential}/${actionMap[action]}`;
+    "importer": `e-iti/imports/${referential}/${id}`,
+    "exporter": `open-iti/exports/${referential}/${id}`,
+    "validator": `e-iti/imports/${referential}/${id}`
+  }
+  const URL = `${baseURL}/${actionMap[action]}`
 
   return (
     <a title={URL} target="_blank" href={URL}>
